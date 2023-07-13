@@ -7,6 +7,4 @@ Découvrez, ci-dessous, les principales statistiques relatives à la sécurité 
 
 2-Données issues d'enquêtes en population générale ou d'autres enquêtes
 
-(Lien vers l'application de datavisualisation)[https://ssmsi.shinyapps.io/ChiffresCles]
-
-[Lien](https://example.com/ "titre de lien optionnel").
+[Lien vers l'application de datavisualisation](https://ssmsi.shinyapps.io/ChiffresCles/) 
