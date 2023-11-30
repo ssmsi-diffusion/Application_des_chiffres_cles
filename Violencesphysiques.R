@@ -61,77 +61,135 @@ output$violences_physiques_UI<-renderUI({
     )
     
     
-  })  
+})  
   
-
-  
-  
-observeEvent(input$Violencesphysiques,{
 
 output$Nb_victimes_CBV<-renderHighchart({
-      
-      highchartFunction(ViolencesPhysiques()$Nb_victime_cbv,'column',ChoixCouleursBar[1:length(unique(ViolencesPhysiques()$Nb_victime_cbv$Indicateurs))],
-                         
-                         hcaes(x=as.character(unite_temps),y=RoundValuesFunction(value),group=Indicateurs),"stacking",EnableLabels=TRUE,
-                         
-                         HEADER=unique(ViolencesPhysiques()$Nb_victime_cbv$titre),
-                         
-                         FormatLabelsData="Indicateurs",InfosPlus="Année")
-      
-      
-    })
-    
-    
-output$Nb_mec_cbv<-renderHighchart({
-      
-      highchartFunction(ViolencesPhysiques()$Nb_mec_cbv,'pie',ChoixCouleurs,
-                         
-                         hcaes(x=as.character(unite_temps),y=RoundValuesFunction(value)),"NDonut",
-                         
-                         HEADER=unique(ViolencesPhysiques()$Nb_mec_cbv$titre),
-                         
-                         FormatLabelsData="Indicateurs")
-      
-      
-    })
-    
-    
-    
-    
-output$repartition_CBV<-renderHighchart({
-      
-  highchartFunction(ViolencesPhysiques()$repartition_CBV,'pie',list("#77B5FE","#FF7F00"),
-                     
-                     hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"PPIE",
-                     
-                     HEADER=unique(ViolencesPhysiques()$repartition_CBV$titre),
-                     
-                     FormatLabelsData="Indicateurs")
-      
-      
+  
+  highchartFunction(ViolencesPhysiques()$Nb_victime_cbv,'column',ChoixCouleursBar[1:length(unique(ViolencesPhysiques()$Nb_victime_cbv$Indicateurs))],
+                    
+                    hcaes(x=as.character(unite_temps),y=RoundValuesFunction(value),group=Indicateurs),"stacking",EnableLabels=TRUE,
+                    
+                    HEADER=unique(ViolencesPhysiques()$Nb_victime_cbv$titre),
+                    
+                    FormatLabelsData="Indicateurs",InfosPlus="Année")
+  
+  
 })
-    
-    
-    
-    
-output$taux_plainte_cbv<-renderHighchart({
 
-      highchartFunction(ViolencesPhysiques()$data_taux_plainte_cbv,'pie',list("#77B5FE"),
-                         
-                         hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"SampleDonut",
-                         
-                         HEADER=unique(ViolencesPhysiques()$data_taux_plainte_cbv$titre),
-                         
-                         FormatLabelsData="unite_temps")
-      
-      
-    })
-    
-    
-    
-    
-    
-},ignoreInit=FALSE,ignoreNULL=FALSE)
+
+output$Nb_mec_cbv<-renderHighchart({
+  
+  highchartFunction(ViolencesPhysiques()$Nb_mec_cbv,'pie',ChoixCouleurs,
+                    
+                    hcaes(x=as.character(unite_temps),y=RoundValuesFunction(value)),"NDonut",
+                    
+                    HEADER=unique(ViolencesPhysiques()$Nb_mec_cbv$titre),
+                    
+                    FormatLabelsData="Indicateurs")
+  
+  
+})
+
+
+
+
+output$repartition_CBV<-renderHighchart({
+  
+  highchartFunction(ViolencesPhysiques()$repartition_CBV,'pie',list("#77B5FE","#FF7F00"),
+                    
+                    hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"PPIE",
+                    
+                    HEADER=unique(ViolencesPhysiques()$repartition_CBV$titre),
+                    
+                    FormatLabelsData="Indicateurs")
+  
+  
+})
+
+
+
+
+output$taux_plainte_cbv<-renderHighchart({
+  
+  highchartFunction(ViolencesPhysiques()$data_taux_plainte_cbv,'pie',list("#77B5FE"),
+                    
+                    hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"SampleDonut",
+                    
+                    HEADER=unique(ViolencesPhysiques()$data_taux_plainte_cbv$titre),
+                    
+                    FormatLabelsData="unite_temps")
+  
+  
+})
+
+
+  
+  
+# observeEvent(input$Violencesphysiques,{
+# 
+# output$Nb_victimes_CBV<-renderHighchart({
+#       
+#       highchartFunction(ViolencesPhysiques()$Nb_victime_cbv,'column',ChoixCouleursBar[1:length(unique(ViolencesPhysiques()$Nb_victime_cbv$Indicateurs))],
+#                          
+#                          hcaes(x=as.character(unite_temps),y=RoundValuesFunction(value),group=Indicateurs),"stacking",EnableLabels=TRUE,
+#                          
+#                          HEADER=unique(ViolencesPhysiques()$Nb_victime_cbv$titre),
+#                          
+#                          FormatLabelsData="Indicateurs",InfosPlus="Année")
+#       
+#       
+#     })
+#     
+#     
+# output$Nb_mec_cbv<-renderHighchart({
+#       
+#       highchartFunction(ViolencesPhysiques()$Nb_mec_cbv,'pie',ChoixCouleurs,
+#                          
+#                          hcaes(x=as.character(unite_temps),y=RoundValuesFunction(value)),"NDonut",
+#                          
+#                          HEADER=unique(ViolencesPhysiques()$Nb_mec_cbv$titre),
+#                          
+#                          FormatLabelsData="Indicateurs")
+#       
+#       
+#     })
+#     
+#     
+#     
+#     
+# output$repartition_CBV<-renderHighchart({
+#       
+#   highchartFunction(ViolencesPhysiques()$repartition_CBV,'pie',list("#77B5FE","#FF7F00"),
+#                      
+#                      hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"PPIE",
+#                      
+#                      HEADER=unique(ViolencesPhysiques()$repartition_CBV$titre),
+#                      
+#                      FormatLabelsData="Indicateurs")
+#       
+#       
+# })
+#     
+#     
+#     
+#     
+# output$taux_plainte_cbv<-renderHighchart({
+# 
+#       highchartFunction(ViolencesPhysiques()$data_taux_plainte_cbv,'pie',list("#77B5FE"),
+#                          
+#                          hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"SampleDonut",
+#                          
+#                          HEADER=unique(ViolencesPhysiques()$data_taux_plainte_cbv$titre),
+#                          
+#                          FormatLabelsData="unite_temps")
+#       
+#       
+# })
+#     
+# 
+# 
+# },ignoreInit=FALSE,ignoreNULL=FALSE)
   
   
   

@@ -121,80 +121,145 @@ Reactive_insecurite_part_sexe_select<-reactive({
   
 
   
+
+output$Nb_pers_14plus<-renderHighchart({
   
+  Nombre_pers_insecurite<-Reactive_Nb_pers_14plus() %>% filter(Reactive_Nb_pers_14plus()$statistiques=="Nombre (en millions)")
   
+  part_prs_insecurite<-Reactive_Nb_pers_14plus() %>% filter(Reactive_Nb_pers_14plus()$statistiques=="Proportion de la population se sentant en insécurité")
   
+  Multiaxe(
+    Reactive_Nb_pers_14plus(),
+    Nombre_pers_insecurite,
+    part_prs_insecurite,
+    Reactive_Nb_pers_14plus()$unite_temps,
+    c("column","line"),
+    c("#3497db","#FF7F00"),FirstDataLabelsFormat=list(enabled=TRUE,format = "{point.y:,.1f}",style=list(color="#000000",fontWeight="normal")))
   
-observeEvent(input$Sentimentdinsecurite,{
-
-    output$Nb_pers_14plus<-renderHighchart({
-
-      Nombre_pers_insecurite<-Reactive_Nb_pers_14plus() %>% filter(Reactive_Nb_pers_14plus()$statistiques=="Nombre (en millions)")
-
-      part_prs_insecurite<-Reactive_Nb_pers_14plus() %>% filter(Reactive_Nb_pers_14plus()$statistiques=="Proportion de la population se sentant en insécurité")
-
-      Multiaxe(
-        Reactive_Nb_pers_14plus(),
-        Nombre_pers_insecurite,
-        part_prs_insecurite,
-        Reactive_Nb_pers_14plus()$unite_temps,
-        c("column","line"),
-        c("#3497db","#FF7F00"),FirstDataLabelsFormat=list(enabled=TRUE,format = "{point.y:,.1f}",style=list(color="#000000",fontWeight="normal")))
-
 })
 
 
 
 
 output$insecurite_part_unite_urbaine<-renderHighchart({
-
+  
   highchartFunction(Reactive_insecurite_unite_urbaine(),'column',c("#3497db"),
-
-                     hcaes(x=as.character(Indicateurs),y=as.numeric(value),group=statistiques),"N",
-
-                     HEADER=unique(Reactive_insecurite_unite_urbaine()$titre),
-
-                     FormatLabelsData="Indicateurs")
-
-
-
-  })
+                    
+                    hcaes(x=as.character(Indicateurs),y=as.numeric(value),group=statistiques),"N",
+                    
+                    HEADER=unique(Reactive_insecurite_unite_urbaine()$titre),
+                    
+                    FormatLabelsData="Indicateurs")
+  
+  
+  
+})
 
 
 
 
 output$insecurite_part_age<-renderHighchart({
-
+  
   highchartFunction(Reactive_insecurite_part_age(),'bar',c("#3497db"),
-
-                     hcaes(x=as.character(Indicateurs),y=as.numeric(value),group=statistiques),"P",
-
-                     HEADER=unique(Reactive_insecurite_part_age()$titre),
-
-                     FormatLabelsData="Indicateurs")
-
-
-
+                    
+                    hcaes(x=as.character(Indicateurs),y=as.numeric(value),group=statistiques),"P",
+                    
+                    HEADER=unique(Reactive_insecurite_part_age()$titre),
+                    
+                    FormatLabelsData="Indicateurs")
+  
+  
+  
 })
 
 
 
 output$insecurite_part_sexe<-renderHighchart({
-
+  
   highchartFunction(Reactive_insecurite_part_sexe_select(),'column',c("#3497db"),
-
-                     hcaes(x=as.character(Indicateurs),y=as.numeric(value),group=statistiques),"P",
-
-                     HEADER=unique(Reactive_insecurite_part_sexe_select()$titre),
-
-                     FormatLabelsData="Indicateurs")
-
-
-
-  })
-
-
-},ignoreNULL=FALSE)
+                    
+                    hcaes(x=as.character(Indicateurs),y=as.numeric(value),group=statistiques),"P",
+                    
+                    HEADER=unique(Reactive_insecurite_part_sexe_select()$titre),
+                    
+                    FormatLabelsData="Indicateurs")
+  
+  
+  
+})  
+  
+  
+  
+# observeEvent(input$Sentimentdinsecurite,{
+# 
+#     output$Nb_pers_14plus<-renderHighchart({
+# 
+#       Nombre_pers_insecurite<-Reactive_Nb_pers_14plus() %>% filter(Reactive_Nb_pers_14plus()$statistiques=="Nombre (en millions)")
+# 
+#       part_prs_insecurite<-Reactive_Nb_pers_14plus() %>% filter(Reactive_Nb_pers_14plus()$statistiques=="Proportion de la population se sentant en insécurité")
+# 
+#       Multiaxe(
+#         Reactive_Nb_pers_14plus(),
+#         Nombre_pers_insecurite,
+#         part_prs_insecurite,
+#         Reactive_Nb_pers_14plus()$unite_temps,
+#         c("column","line"),
+#         c("#3497db","#FF7F00"),FirstDataLabelsFormat=list(enabled=TRUE,format = "{point.y:,.1f}",style=list(color="#000000",fontWeight="normal")))
+# 
+# })
+# 
+# 
+# 
+# 
+# output$insecurite_part_unite_urbaine<-renderHighchart({
+# 
+#   highchartFunction(Reactive_insecurite_unite_urbaine(),'column',c("#3497db"),
+# 
+#                      hcaes(x=as.character(Indicateurs),y=as.numeric(value),group=statistiques),"N",
+# 
+#                      HEADER=unique(Reactive_insecurite_unite_urbaine()$titre),
+# 
+#                      FormatLabelsData="Indicateurs")
+# 
+# 
+# 
+#   })
+# 
+# 
+# 
+# 
+# output$insecurite_part_age<-renderHighchart({
+# 
+#   highchartFunction(Reactive_insecurite_part_age(),'bar',c("#3497db"),
+# 
+#                      hcaes(x=as.character(Indicateurs),y=as.numeric(value),group=statistiques),"P",
+# 
+#                      HEADER=unique(Reactive_insecurite_part_age()$titre),
+# 
+#                      FormatLabelsData="Indicateurs")
+# 
+# 
+# 
+# })
+# 
+# 
+# 
+# output$insecurite_part_sexe<-renderHighchart({
+# 
+#   highchartFunction(Reactive_insecurite_part_sexe_select(),'column',c("#3497db"),
+# 
+#                      hcaes(x=as.character(Indicateurs),y=as.numeric(value),group=statistiques),"P",
+# 
+#                      HEADER=unique(Reactive_insecurite_part_sexe_select()$titre),
+# 
+#                      FormatLabelsData="Indicateurs")
+# 
+# 
+# 
+#   })
+# 
+# 
+# },ignoreNULL=FALSE)
   
   
 

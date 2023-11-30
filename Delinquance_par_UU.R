@@ -32,64 +32,115 @@ Delinquance_par_UU_server<-function(input,output,session){
   })
   
   
-
+  output$delinquance_par_UU_UI<-renderUI({
+    
+    tagList(
+      
+      outside_container(
+        BoxForChart(Button('delinquance_uu_a'),highchartOutput('delinquance_par_UU_taux'),Selector=TRUE,FullPage=TRUE,
+                    selectInput("Select_delinquance_par_UU_taux","",sort(unique(DelinquanceUUData()$delinquance_par_uu_taux$Indicateurs)),width="60%"))
+        
+        
+      ),
+      
+      
+      
+      
+      br(),
+      br()
+    )
+  })
+  
+  output$delinquance_par_UU_taux<-renderHighchart({
+    
+    
+    if(input$Select_delinquance_par_UU_taux=="Homicides"){
+      
+      DataTable<-Reactive_delinquance_par_UU_taux() %>% filter(Indicateurs=="Homicides")
+      
+      chart<-highchartFunction(DataTable,'bar',ChoixCouleursBar[1:length(unique(DataTable$sous_sous_indicateurs))],
+                               
+                               hcaes(x=as.character(sous_indicateurs),y=as.numeric(value),group=sous_sous_indicateurs),"IntegerStackingP",EnableLabels=TRUE,
+                               
+                               HEADER=unique(DataTable$titre),
+                               
+                               FormatLabelsData="sous_sous_indicateurs")
+      
+    } else {
+      
+      DataTable<-Reactive_delinquance_par_UU_taux() 
+      
+      chart<-highchartFunction(DataTable,'column',ChoixCouleursBar[1:length(unique(DataTable$sous_sous_indicateurs))],
+                               
+                               hcaes(x=as.character(sous_indicateurs),y=as.numeric(value)),"N",
+                               
+                               HEADER=unique(DataTable$titre),
+                               
+                               FormatLabelsData="sous_indicateurs")
+      
+    }
+    
+    
+    
+  })
   
   
-observeEvent(input$Delinquancepartailleduniteurbaine,{
-    output$delinquance_par_UU_UI<-renderUI({
-      
-      tagList(
-        
-        outside_container(
-          BoxForChart(Button('delinquance_uu_a'),highchartOutput('delinquance_par_UU_taux'),Selector=TRUE,FullPage=TRUE,
-                      selectInput("Select_delinquance_par_UU_taux","",sort(unique(DelinquanceUUData()$delinquance_par_uu_taux$Indicateurs)),width="60%"))
-          
-          
-        ),
-        
-        
-        
-        
-        br(),
-        br()
-      )
-    })
-    
-    output$delinquance_par_UU_taux<-renderHighchart({
-      
-      
-      if(input$Select_delinquance_par_UU_taux=="Homicides"){
-        
-        DataTable<-Reactive_delinquance_par_UU_taux() %>% filter(Indicateurs=="Homicides")
-        
-        chart<-highchartFunction(DataTable,'bar',ChoixCouleursBar[1:length(unique(DataTable$sous_sous_indicateurs))],
-                          
-                          hcaes(x=as.character(sous_indicateurs),y=as.numeric(value),group=sous_sous_indicateurs),"IntegerStackingP",EnableLabels=TRUE,
-                          
-                          HEADER=unique(DataTable$titre),
-                          
-                          FormatLabelsData="sous_sous_indicateurs")
-        
-      } else {
-        
-        DataTable<-Reactive_delinquance_par_UU_taux() 
-
-        chart<-highchartFunction(DataTable,'column',ChoixCouleursBar[1:length(unique(DataTable$sous_sous_indicateurs))],
-                          
-                          hcaes(x=as.character(sous_indicateurs),y=as.numeric(value)),"N",
-                          
-                          HEADER=unique(DataTable$titre),
-                          
-                          FormatLabelsData="sous_indicateurs")
-        
-      }
-      
-
-      
-})
-
-    
-},ignoreNULL=FALSE)
+# observeEvent(input$Delinquancepartailleduniteurbaine,{
+#   
+#     output$delinquance_par_UU_UI<-renderUI({
+#       
+#       tagList(
+#         
+#         outside_container(
+#           BoxForChart(Button('delinquance_uu_a'),highchartOutput('delinquance_par_UU_taux'),Selector=TRUE,FullPage=TRUE,
+#                       selectInput("Select_delinquance_par_UU_taux","",sort(unique(DelinquanceUUData()$delinquance_par_uu_taux$Indicateurs)),width="60%"))
+#           
+#           
+#         ),
+#         
+#         
+#         
+#         
+#         br(),
+#         br()
+#       )
+#     })
+#     
+#     output$delinquance_par_UU_taux<-renderHighchart({
+#       
+#       
+#       if(input$Select_delinquance_par_UU_taux=="Homicides"){
+#         
+#         DataTable<-Reactive_delinquance_par_UU_taux() %>% filter(Indicateurs=="Homicides")
+#         
+#         chart<-highchartFunction(DataTable,'bar',ChoixCouleursBar[1:length(unique(DataTable$sous_sous_indicateurs))],
+#                           
+#                           hcaes(x=as.character(sous_indicateurs),y=as.numeric(value),group=sous_sous_indicateurs),"IntegerStackingP",EnableLabels=TRUE,
+#                           
+#                           HEADER=unique(DataTable$titre),
+#                           
+#                           FormatLabelsData="sous_sous_indicateurs")
+#         
+#       } else {
+#         
+#         DataTable<-Reactive_delinquance_par_UU_taux() 
+# 
+#         chart<-highchartFunction(DataTable,'column',ChoixCouleursBar[1:length(unique(DataTable$sous_sous_indicateurs))],
+#                           
+#                           hcaes(x=as.character(sous_indicateurs),y=as.numeric(value)),"N",
+#                           
+#                           HEADER=unique(DataTable$titre),
+#                           
+#                           FormatLabelsData="sous_indicateurs")
+#         
+#       }
+#       
+# 
+#       
+# })
+# 
+#     
+# },ignoreNULL=FALSE)
   
   
   

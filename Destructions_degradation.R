@@ -39,30 +39,43 @@ output$Degradation_UI<-renderUI({
     
   })
   
+
+output$nb_degradation<-renderHighchart({
   
+  highchartFunction(DegradationData()$Nb_degradations,'line',ChoixCouleursBar[1:length(unique(DegradationData()$Nb_degradations$sous_indicateurs))],
+                    
+                    hcaes(x=as.character(unite_temps),y=as.numeric(value),group=sous_indicateurs),"IntegerValues",
+                    
+                    HEADER=unique(DegradationData()$Nb_degradations$titre),
+                    
+                    FormatLabelsData="sous_indicateurs")
+  
+  
+})
+
 
   
-  observeEvent(input$Destructionsetdegradationsdesbiens,{
-  
-    output$nb_degradation<-renderHighchart({
-
-      highchartFunction(DegradationData()$Nb_degradations,'line',ChoixCouleursBar[1:length(unique(DegradationData()$Nb_degradations$sous_indicateurs))],
-                         
-                         hcaes(x=as.character(unite_temps),y=as.numeric(value),group=sous_indicateurs),"IntegerValues",
-                         
-                         HEADER=unique(DegradationData()$Nb_degradations$titre),
-                         
-                         FormatLabelsData="sous_indicateurs")
-      
-      
-    })
-    
-    
-    
-    
-    
-    
-},ignoreNULL=FALSE)
+#   observeEvent(input$Destructionsetdegradationsdesbiens,{
+#   
+#     output$nb_degradation<-renderHighchart({
+# 
+#       highchartFunction(DegradationData()$Nb_degradations,'line',ChoixCouleursBar[1:length(unique(DegradationData()$Nb_degradations$sous_indicateurs))],
+#                          
+#                          hcaes(x=as.character(unite_temps),y=as.numeric(value),group=sous_indicateurs),"IntegerValues",
+#                          
+#                          HEADER=unique(DegradationData()$Nb_degradations$titre),
+#                          
+#                          FormatLabelsData="sous_indicateurs")
+#       
+#       
+#     })
+#     
+#     
+#     
+#     
+#     
+#     
+# },ignoreNULL=FALSE)
 
 
 observeEvent(input$degradation_a, {showInfo(DegradationData()$Nb_degradations)})

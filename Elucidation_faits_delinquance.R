@@ -1,6 +1,6 @@
 
 
-elucidation_ui<-PageLayoutFunction("Elucidation des faits de délinquance",uiOutput("taux_elucidation_UI"))
+elucidation_ui<-PageLayoutFunction("Élucidation des faits de délinquance",uiOutput("taux_elucidation_UI"))
 
 
 elucidation_server<-function(input,output,session){
@@ -56,24 +56,38 @@ output$taux_elucidation_UI<-renderUI({
 })
 
 
-
-
-observeEvent(input$Elucidationdesfaitsdedelinquance,{
-
 output$tx_elucidation<-renderHighchart({
+  
+  highchartFunction(Reactive_tx_elucidation(),'bar',c("#6b93f6"),
+                    
+                    hcaes(x=as.character(unite_temps),y=as.numeric(value)),"P",
+                    
+                    HEADER=unique(Reactive_tx_elucidation()$titre),
+                    
+                    FormatLabelsData="unite_temps")
+  
+  
+})
 
-      highchartFunction(Reactive_tx_elucidation(),'bar',c("#6b93f6"),
-                         
-                         hcaes(x=as.character(unite_temps),y=as.numeric(value)),"P",
-                         
-                         HEADER=unique(Reactive_tx_elucidation()$titre),
-                         
-                         FormatLabelsData="unite_temps")
-      
 
-    })
-    
-},ignoreNULL=FALSE)
+# observeEvent(input$Elucidationdesfaitsdedelinquance,{
+# 
+# output$tx_elucidation<-renderHighchart({
+# 
+#       highchartFunction(Reactive_tx_elucidation(),'bar',c("#6b93f6"),
+#                          
+#                          hcaes(x=as.character(unite_temps),y=as.numeric(value)),"P",
+#                          
+#                          HEADER=unique(Reactive_tx_elucidation()$titre),
+#                          
+#                          FormatLabelsData="unite_temps")
+#       
+# 
+# })
+# 
+# 
+#     
+# },ignoreNULL=FALSE)
   
   
   

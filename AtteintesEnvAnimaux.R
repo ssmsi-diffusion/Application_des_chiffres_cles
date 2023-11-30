@@ -82,135 +82,253 @@ output$atteintesNatureUI<-renderUI({
   })
   
   
-  
-  
-  
-  
-  
-observeEvent(input$Atteintesalenvironnementetauxanimaux,{
+  output$Nb_atteinte<-renderHighchart({
     
-    output$Nb_atteinte<-renderHighchart({
-
-      highchartFunction(AtteinteEnv()$Nb_atteinte_env,'line',c("#1283f3"),
-                         
-                         hcaes(x=as.character(unite_temps),y=as.numeric(value)),"IntegerValues",
-                         
-                         HEADER=unique(AtteinteEnv()$Nb_atteinte_env$titre),
-                         
-                         FormatLabelsData="unite_temps")
-      
-      
-      
-    })
+    highchartFunction(AtteinteEnv()$Nb_atteinte_env,'line',c("#1283f3"),
+                      
+                      hcaes(x=as.character(unite_temps),y=as.numeric(value)),"IntegerValues",
+                      
+                      HEADER=unique(AtteinteEnv()$Nb_atteinte_env$titre),
+                      
+                      FormatLabelsData="unite_temps")
     
     
     
-    
-    output$part_atteinte<-renderHighchart({
-      
-      highchartFunction(AtteinteEnv()$part_atteinte_env,'bar',c("#0daaf3","#1560BD"),
-                         
-                         hcaes(x=as.character(Indicateurs),y=as.numeric(value),group=sous_indicateurs),"stacking",
-                         
-                         HEADER=unique(AtteinteEnv()$part_atteinte_env$titre),
-                         
-                         FormatLabelsData="sous_indicateurs",InfosPlus="Délit")
-      
-      
-      
-    })
-    
-    
-    
-    
-    output$repart_moyenne_att_env<-renderHighchart({
-      
-      highchartFunction(AtteinteEnv()$repart_moyenne_att_env,'column',c("#1560BD"),
-                         
-                         hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"P",
-                         
-                         HEADER=unique(AtteinteEnv()$repart_moyenne_att_env$titre),
-                         
-                         FormatLabelsData="unite_temps")
-      
-      
-      
-    })
-    
-    
-
-#### Partie II : Atteinte envers les animaux   
-    
-
-output$nb_atteinte_animaux<-renderHighchart({
-      
-      highchartFunction(AtteinteEnv()$nb_atteinte_animaux,'line',c("#1283f3"),
-                         
-                         hcaes(x=as.character(unite_temps),y=as.numeric(value)),"IntegerValues",
-                         
-                         HEADER=unique(AtteinteEnv()$nb_atteinte_animaux$titre),
-                         
-                         FormatLabelsData="unite_temps")
-      
-      
-      
-    })    
-    
-    
-    
-output$repart_atteinte_animaux<-renderHighchart({
-   
-      highchartFunction(AtteinteEnv()$repart_moyenne_att_env,'pie',ChoixCouleurs,
-                         
-                         hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"PPIE",
-                         
-                         HEADER=unique(AtteinteEnv()$repart_atteinte_animaux$titre),
-                         
-                         FormatLabelsData="Indicateurs")
-      
-      
   })
-    
-    
-     
-    
- 
-output$repart_moyenne_att_animaux<-renderHighchart({
-
-  highchartFunction(AtteinteEnv()$repart_moy_atteinte_animaux,'column',c("#FF7F00","#1283f3"),
-                     
-                     hcaes(x=as.character(Indicateurs),y=as.numeric(value),group=sous_indicateurs),"IntegerValues",
-                     
-                     HEADER=unique(AtteinteEnv()$repart_moy_atteinte_animaux$titre),
-                     
-                    FormatLabelsData="sous_indicateurs",InfosPlus="Espèce victime")
   
   
   
   
-      
-})
+  output$part_atteinte<-renderHighchart({
+    
+    highchartFunction(AtteinteEnv()$part_atteinte_env,'bar',c("#0daaf3","#1560BD"),
+                      
+                      hcaes(x=as.character(Indicateurs),y=as.numeric(value),group=sous_indicateurs),"stacking",
+                      
+                      HEADER=unique(AtteinteEnv()$part_atteinte_env$titre),
+                      
+                      FormatLabelsData="sous_indicateurs",InfosPlus="Délit")
     
     
-
-
-
-
-output$Chart_repart_moy_par_type_maltraitance<-renderHighchart({
-      
-  highchartFunction(AtteinteEnv()$repart_moy_par_type_maltraitance,'column',c("#FF7F00","#1283f3"),
-                     
-                     hcaes(x=as.character(Indicateurs),y=as.numeric(value),group=sous_indicateurs),"IntegerValues",
-                     
-                     HEADER=unique(AtteinteEnv()$repart_moy_par_type_maltraitance$titre), 
-                     
-                     FormatLabelsData="sous_indicateurs",InfosPlus="Type de maltraitance")
-      
-      
-})  
     
-
-},ignoreNULL=FALSE)
+  })
+  
+  
+  
+  
+  output$repart_moyenne_att_env<-renderHighchart({
+    
+    highchartFunction(AtteinteEnv()$repart_moyenne_att_env,'column',c("#1560BD"),
+                      
+                      hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"P",
+                      
+                      HEADER=unique(AtteinteEnv()$repart_moyenne_att_env$titre),
+                      
+                      FormatLabelsData="unite_temps")
+    
+    
+    
+  })
+  
+  
+  
+  #### Partie II : Atteinte envers les animaux   
+  
+  
+  output$nb_atteinte_animaux<-renderHighchart({
+    
+    highchartFunction(AtteinteEnv()$nb_atteinte_animaux,'line',c("#1283f3"),
+                      
+                      hcaes(x=as.character(unite_temps),y=as.numeric(value)),"IntegerValues",
+                      
+                      HEADER=unique(AtteinteEnv()$nb_atteinte_animaux$titre),
+                      
+                      FormatLabelsData="unite_temps")
+    
+    
+    
+  })    
+  
+  
+  
+  output$repart_atteinte_animaux<-renderHighchart({
+    
+    highchartFunction(AtteinteEnv()$repart_moyenne_att_env,'pie',ChoixCouleurs,
+                      
+                      hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"PPIE",
+                      
+                      HEADER=unique(AtteinteEnv()$repart_atteinte_animaux$titre),
+                      
+                      FormatLabelsData="Indicateurs")
+    
+    
+  })
+  
+  
+  
+  
+  
+  output$repart_moyenne_att_animaux<-renderHighchart({
+    
+    highchartFunction(AtteinteEnv()$repart_moy_atteinte_animaux,'column',c("#FF7F00","#1283f3"),
+                      
+                      hcaes(x=as.character(Indicateurs),y=as.numeric(value),group=sous_indicateurs),"IntegerValues",
+                      
+                      HEADER=unique(AtteinteEnv()$repart_moy_atteinte_animaux$titre),
+                      
+                      FormatLabelsData="sous_indicateurs",InfosPlus="Espèce victime")
+    
+    
+    
+    
+    
+  })
+  
+  
+  
+  
+  
+  
+  output$Chart_repart_moy_par_type_maltraitance<-renderHighchart({
+    
+    highchartFunction(AtteinteEnv()$repart_moy_par_type_maltraitance,'column',c("#FF7F00","#1283f3"),
+                      
+                      hcaes(x=as.character(Indicateurs),y=as.numeric(value),group=sous_indicateurs),"IntegerValues",
+                      
+                      HEADER=unique(AtteinteEnv()$repart_moy_par_type_maltraitance$titre), 
+                      
+                      FormatLabelsData="sous_indicateurs",InfosPlus="Type de maltraitance")
+    
+    
+  })    
+  
+  
+  
+  
+# observeEvent(input$Atteintesalenvironnementetauxanimaux,{
+#     
+#     output$Nb_atteinte<-renderHighchart({
+# 
+#       highchartFunction(AtteinteEnv()$Nb_atteinte_env,'line',c("#1283f3"),
+#                          
+#                          hcaes(x=as.character(unite_temps),y=as.numeric(value)),"IntegerValues",
+#                          
+#                          HEADER=unique(AtteinteEnv()$Nb_atteinte_env$titre),
+#                          
+#                          FormatLabelsData="unite_temps")
+#       
+#       
+#       
+#     })
+#     
+#     
+#     
+#     
+#     output$part_atteinte<-renderHighchart({
+#       
+#       highchartFunction(AtteinteEnv()$part_atteinte_env,'bar',c("#0daaf3","#1560BD"),
+#                          
+#                          hcaes(x=as.character(Indicateurs),y=as.numeric(value),group=sous_indicateurs),"stacking",
+#                          
+#                          HEADER=unique(AtteinteEnv()$part_atteinte_env$titre),
+#                          
+#                          FormatLabelsData="sous_indicateurs",InfosPlus="Délit")
+#       
+#       
+#       
+#     })
+#     
+#     
+#     
+#     
+#     output$repart_moyenne_att_env<-renderHighchart({
+#       
+#       highchartFunction(AtteinteEnv()$repart_moyenne_att_env,'column',c("#1560BD"),
+#                          
+#                          hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"P",
+#                          
+#                          HEADER=unique(AtteinteEnv()$repart_moyenne_att_env$titre),
+#                          
+#                          FormatLabelsData="unite_temps")
+#       
+#       
+#       
+#     })
+#     
+#     
+# 
+# #### Partie II : Atteinte envers les animaux   
+#     
+# 
+# output$nb_atteinte_animaux<-renderHighchart({
+#       
+#       highchartFunction(AtteinteEnv()$nb_atteinte_animaux,'line',c("#1283f3"),
+#                          
+#                          hcaes(x=as.character(unite_temps),y=as.numeric(value)),"IntegerValues",
+#                          
+#                          HEADER=unique(AtteinteEnv()$nb_atteinte_animaux$titre),
+#                          
+#                          FormatLabelsData="unite_temps")
+#       
+#       
+#       
+#     })    
+#     
+#     
+#     
+# output$repart_atteinte_animaux<-renderHighchart({
+#    
+#       highchartFunction(AtteinteEnv()$repart_moyenne_att_env,'pie',ChoixCouleurs,
+#                          
+#                          hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"PPIE",
+#                          
+#                          HEADER=unique(AtteinteEnv()$repart_atteinte_animaux$titre),
+#                          
+#                          FormatLabelsData="Indicateurs")
+#       
+#       
+#   })
+#     
+#     
+#      
+#     
+#  
+# output$repart_moyenne_att_animaux<-renderHighchart({
+# 
+#   highchartFunction(AtteinteEnv()$repart_moy_atteinte_animaux,'column',c("#FF7F00","#1283f3"),
+#                      
+#                      hcaes(x=as.character(Indicateurs),y=as.numeric(value),group=sous_indicateurs),"IntegerValues",
+#                      
+#                      HEADER=unique(AtteinteEnv()$repart_moy_atteinte_animaux$titre),
+#                      
+#                     FormatLabelsData="sous_indicateurs",InfosPlus="Espèce victime")
+#   
+#   
+#   
+#   
+#       
+# })
+#     
+#     
+# 
+# 
+# 
+# 
+# output$Chart_repart_moy_par_type_maltraitance<-renderHighchart({
+#       
+#   highchartFunction(AtteinteEnv()$repart_moy_par_type_maltraitance,'column',c("#FF7F00","#1283f3"),
+#                      
+#                      hcaes(x=as.character(Indicateurs),y=as.numeric(value),group=sous_indicateurs),"IntegerValues",
+#                      
+#                      HEADER=unique(AtteinteEnv()$repart_moy_par_type_maltraitance$titre), 
+#                      
+#                      FormatLabelsData="sous_indicateurs",InfosPlus="Type de maltraitance")
+#       
+#       
+# })  
+#     
+# 
+# },ignoreNULL=FALSE)
   
   
   

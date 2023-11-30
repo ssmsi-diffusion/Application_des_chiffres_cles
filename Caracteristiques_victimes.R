@@ -135,51 +135,45 @@ profil_victimes()$tx_1000_profil_victimes %>% filter(Indicateurs==input$ProfilTa
 })
   
   
-  
-
-  
-  
-observeEvent(input$Victimes,{ 
-
 output$repart_nationalite_victimes_chart<-renderHighchart({  
-
+  
   highchartFunction(Nationalite_Victimes_Reactives(),'pie',ChoixCouleurs,    
-                     
-                     hcaes(x=as.character(sous_indicateurs),y=lapply(as.numeric(value),function(x){round(x)})),"PPIE",
-                     
-                     HEADER=unique(Nationalite_Victimes_Reactives()$titre),
-                     
-                     FormatLabelsData="sous_indicateurs")
+                    
+                    hcaes(x=as.character(sous_indicateurs),y=lapply(as.numeric(value),function(x){round(x)})),"PPIE",
+                    
+                    HEADER=unique(Nationalite_Victimes_Reactives()$titre),
+                    
+                    FormatLabelsData="sous_indicateurs")
   
-      
+  
 })
-    
-    
+
+
 output$repart_par_age_victimes<-renderHighchart({
-
+  
   highchartFunction(age_profil_victimes_reactive(),'pie',ChoixCouleurs,
-                     
-                     hcaes(x=as.character(sous_indicateurs),y=as.numeric(value)),"PPIE",
-                     
-                     HEADER=unique(age_profil_victimes_reactive()$titre),
-                     
-                     FormatLabelsData="sous_indicateurs")
+                    
+                    hcaes(x=as.character(sous_indicateurs),y=as.numeric(value)),"PPIE",
+                    
+                    HEADER=unique(age_profil_victimes_reactive()$titre),
+                    
+                    FormatLabelsData="sous_indicateurs")
   
   
-      
+  
 })
-    
 
-    
+
+
 output$Taux100hbtsProfilVictimes<-renderHighchart({
- 
+  
   highchartFunction(pv_taux100hbt(),'line',ChoixCouleursBar[1:length(unique(pv_taux100hbt()$sous_indicateurs))],
-                     
-                     hcaes(x=as.character(sous_sous_indicateurs),y=as.numeric(value),group=sous_indicateurs),"N",
-                     
-                     HEADER=unique(pv_taux100hbt()$titre),
-                     
-                     FormatLabelsData="sous_indicateurs",InfosPlus="Catégorie")
+                    
+                    hcaes(x=as.character(sous_sous_indicateurs),y=as.numeric(value),group=sous_indicateurs),"N",
+                    
+                    HEADER=unique(pv_taux100hbt()$titre),
+                    
+                    FormatLabelsData="sous_indicateurs",InfosPlus="Catégorie")
   
   
 })
@@ -191,12 +185,12 @@ output$Taux100hbtsProfilVictimes<-renderHighchart({
 output$chart_victimes_parmi_les_forces_de_securite<-renderHighchart({
   
   highchartFunction(profil_victimes()$victimes_parmi_les_forces_de_securite,'column',ChoixCouleursBar[1:length(unique(profil_victimes()$victimes_parmi_les_forces_de_securite$sous_indicateurs))],
-                     
-                     hcaes(x=as.character(sous_sous_indicateurs),y=as.numeric(value),group=sous_indicateurs),"P",
-                     
-                     HEADER=unique(profil_victimes()$victimes_parmi_les_forces_de_securite$titre),
-                     
-                     FormatLabelsData="sous_indicateurs",InfosPlus="Catégorie")
+                    
+                    hcaes(x=as.character(sous_sous_indicateurs),y=as.numeric(value),group=sous_indicateurs),"P",
+                    
+                    HEADER=unique(profil_victimes()$victimes_parmi_les_forces_de_securite$titre),
+                    
+                    FormatLabelsData="sous_indicateurs",InfosPlus="Catégorie")
   
   
 })
@@ -206,21 +200,102 @@ output$chart_victimes_parmi_les_forces_de_securite<-renderHighchart({
 output$chart_victimes_de_violences_dans_l_enfance<-renderHighchart({
   
   highchartFunction(profil_victimes()$victimes_de_violences_dans_l_enfance,'column',
-                     
-                     ChoixCouleursBar[1:length(unique(profil_victimes()$victimes_de_violences_dans_l_enfance$sous_indicateurs))],
-                     
-                     hcaes(x=as.character(sous_sous_indicateurs),y=as.numeric(value),group=sous_indicateurs),"P",
-                     
-                     HEADER=unique(profil_victimes()$victimes_de_violences_dans_l_enfance$titre),
-                     
-                     FormatLabelsData="sous_indicateurs",InfosPlus="Catégorie")
+                    
+                    ChoixCouleursBar[1:length(unique(profil_victimes()$victimes_de_violences_dans_l_enfance$sous_indicateurs))],
+                    
+                    hcaes(x=as.character(sous_sous_indicateurs),y=as.numeric(value),group=sous_indicateurs),"P",
+                    
+                    HEADER=unique(profil_victimes()$victimes_de_violences_dans_l_enfance$titre),
+                    
+                    FormatLabelsData="sous_indicateurs",InfosPlus="Catégorie")
   
   
-})
+})  
 
-   
-    
-},ignoreNULL=FALSE)
+  
+  
+# observeEvent(input$Victimes,{ 
+# 
+# output$repart_nationalite_victimes_chart<-renderHighchart({  
+# 
+#   highchartFunction(Nationalite_Victimes_Reactives(),'pie',ChoixCouleurs,    
+#                      
+#                      hcaes(x=as.character(sous_indicateurs),y=lapply(as.numeric(value),function(x){round(x)})),"PPIE",
+#                      
+#                      HEADER=unique(Nationalite_Victimes_Reactives()$titre),
+#                      
+#                      FormatLabelsData="sous_indicateurs")
+#   
+#       
+# })
+#     
+#     
+# output$repart_par_age_victimes<-renderHighchart({
+# 
+#   highchartFunction(age_profil_victimes_reactive(),'pie',ChoixCouleurs,
+#                      
+#                      hcaes(x=as.character(sous_indicateurs),y=as.numeric(value)),"PPIE",
+#                      
+#                      HEADER=unique(age_profil_victimes_reactive()$titre),
+#                      
+#                      FormatLabelsData="sous_indicateurs")
+#   
+#   
+#       
+# })
+#     
+# 
+#     
+# output$Taux100hbtsProfilVictimes<-renderHighchart({
+#  
+#   highchartFunction(pv_taux100hbt(),'line',ChoixCouleursBar[1:length(unique(pv_taux100hbt()$sous_indicateurs))],
+#                      
+#                      hcaes(x=as.character(sous_sous_indicateurs),y=as.numeric(value),group=sous_indicateurs),"N",
+#                      
+#                      HEADER=unique(pv_taux100hbt()$titre),
+#                      
+#                      FormatLabelsData="sous_indicateurs",InfosPlus="Catégorie")
+#   
+#   
+# })
+# 
+# 
+# 
+# 
+# 
+# output$chart_victimes_parmi_les_forces_de_securite<-renderHighchart({
+#   
+#   highchartFunction(profil_victimes()$victimes_parmi_les_forces_de_securite,'column',ChoixCouleursBar[1:length(unique(profil_victimes()$victimes_parmi_les_forces_de_securite$sous_indicateurs))],
+#                      
+#                      hcaes(x=as.character(sous_sous_indicateurs),y=as.numeric(value),group=sous_indicateurs),"P",
+#                      
+#                      HEADER=unique(profil_victimes()$victimes_parmi_les_forces_de_securite$titre),
+#                      
+#                      FormatLabelsData="sous_indicateurs",InfosPlus="Catégorie")
+#   
+#   
+# })
+# 
+# 
+# 
+# output$chart_victimes_de_violences_dans_l_enfance<-renderHighchart({
+#   
+#   highchartFunction(profil_victimes()$victimes_de_violences_dans_l_enfance,'column',
+#                      
+#                      ChoixCouleursBar[1:length(unique(profil_victimes()$victimes_de_violences_dans_l_enfance$sous_indicateurs))],
+#                      
+#                      hcaes(x=as.character(sous_sous_indicateurs),y=as.numeric(value),group=sous_indicateurs),"P",
+#                      
+#                      HEADER=unique(profil_victimes()$victimes_de_violences_dans_l_enfance$titre),
+#                      
+#                      FormatLabelsData="sous_indicateurs",InfosPlus="Catégorie")
+#   
+#   
+# })
+# 
+#    
+#     
+# },ignoreNULL=FALSE)
   
   
 

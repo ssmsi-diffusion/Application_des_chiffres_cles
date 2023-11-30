@@ -1,0 +1,99 @@
+
+.modal-body a{text-decoration:underline;}
+              
+  .radio{width:550px;}
+             
+  .row .navigation h4{text-decoration:none;color:#000;font-size:14px;font-weight:normal;}
+          
+  .card-body .btn-default{white-space:normal !important;background-color:#fff;color:#000;border:1px solid #C0C0C0;text-align:start;width:500px;padding:10px 10px;transition:transform .3s;}
+               
+ .card-body .btn:hover{
+   transform:scale(1.05);
+   background-color:#fff;
+   color:#000;
+  }
+            
+  
+
+
+@media screen and (max-width: 1000px) {
+   .card-body .btn:hover{
+    transform:none;
+  }
+
+                
+  .card-body .btn{
+   height:50px;
+   width:100%;
+   margin-bottom:5px;
+   padding-left:5px;
+   justify-content:start;
+                  
+  }
+                 
+  }  
+
+  .btn-default:hover {background-color:#fff;color:#000;} 
+
+           
+              
+ .infobutton .btn-default{
+    width:auto;
+    float:right;
+    background-color:#fff;
+    color:#000;
+  }
+
+.modal-dialog{padding-top:90px;}
+
+  @media screen and (max-width: 1000px) {
+
+   .highcharts-exporting-group{display:none !important;}
+              
+    .navigation li span{display:none;}
+              
+    .navigation{flex-direction:column;align-items:start !important;}
+              
+    .navigation li{padding-right:0;margin-left:0 !important;text-decoration:none;}
+
+    .row,.navigation{padding:0 5px !important;}
+              
+ }
+              
+ @media screen and (max-width: 1800px) {
+
+  .row,.navigation{padding:0 15px !important;}
+                
+   .btn-group-toggle{margin-top:15px;}
+              
+   .btn-group-container-sw{padding-left:15px !important;}
+            
+ }
+
+ .datatables{width:100% !important;}
+
+ .col-md-2 h5{text-align:justify;}
+             
+ .html-widget-static-bound{height:850px!important;}
+             
+ .col-lg-12{margin-bottom:25px;}
+             
+  .btn-default{width:300px;}
+             
+ .highchart{height:498px !important;}
+             
+  ul li {padding-top:5px;}
+             
+ @media screen and (max-width:768px) {
+
+  .box .btn{font-size: 0.82em;}
+
+  .row .navigation h4{text-decoration:none;color:#1560BD;font-size:13px;text-transform:full-size-kana;}
+            
+}
+
+
+
+
+
+

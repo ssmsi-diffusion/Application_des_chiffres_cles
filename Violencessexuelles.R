@@ -49,57 +49,98 @@ output$violences_Sexuelles_ui<-renderUI({
     
     
 })
-  
-  
-  
-observeEvent(input$Violencessexuelles,{
-    
+
 
 output$Nb_victimes_VS<-renderHighchart({
   
   highchartFunction(ViolencesSexuelles()$Nb_violences_sexuelles,'column',ChoixCouleursBar[1:length(unique(ViolencesSexuelles()$Nb_violences_sexuelles$Indicateurs))],
-                         
-                         hcaes(x=as.character(unite_temps),y=RoundValuesFunction(value),group=Indicateurs),"stacking",EnableLabels=TRUE,
-                         
-                         HEADER=unique(ViolencesSexuelles()$Nb_violences_sexuelles$titre),
+                    
+                    hcaes(x=as.character(unite_temps),y=RoundValuesFunction(value),group=Indicateurs),"stacking",EnableLabels=TRUE,
+                    
+                    HEADER=unique(ViolencesSexuelles()$Nb_violences_sexuelles$titre),
+                    
+                    FormatLabelsData="Indicateurs",InfosPlus="Année")
+  
+  
+})
 
-                         FormatLabelsData="Indicateurs",InfosPlus="Année")
-      
-      
-  })
-    
-    
-    
+
+
 output$mec_VS<-renderHighchart({
+  
+  highchartFunction(ViolencesSexuelles()$mec_VS,'pie',ChoixCouleurs,
+                    
+                    hcaes(x=as.character(unite_temps),y=RoundValuesFunction(value)),"NDonut",
+                    
+                    HEADER=unique(ViolencesSexuelles()$mec_VS$titre),
+                    
+                    FormatLabelsData="Indicateurs",InfosPlus="Année")  
+  
+  
+})
 
-    highchartFunction(ViolencesSexuelles()$mec_VS,'pie',ChoixCouleurs,
-                         
-                         hcaes(x=as.character(unite_temps),y=RoundValuesFunction(value)),"NDonut",
-                         
-                         HEADER=unique(ViolencesSexuelles()$mec_VS$titre),
-                         
-                         FormatLabelsData="Indicateurs",InfosPlus="Année")  
-      
-      
-  })
-    
-    
+
 output$repartition_VS<-renderHighchart({
-
-      highchartFunction(ViolencesSexuelles()$repartition_VS,'pie',ChoixCouleurs,
-                         
-                         hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"PPIE",
-                         
-                         HEADER=unique(ViolencesSexuelles()$repartition_VS$titre),
-                         
-                         FormatLabelsData="Indicateurs") 
-      
-      
-    })
-    
-
-
-},ignoreInit=FALSE,ignoreNULL=FALSE)
+  
+  highchartFunction(ViolencesSexuelles()$repartition_VS,'pie',ChoixCouleurs,
+                    
+                    hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"PPIE",
+                    
+                    HEADER=unique(ViolencesSexuelles()$repartition_VS$titre),
+                    
+                    FormatLabelsData="Indicateurs") 
+  
+  
+})  
+  
+  
+# observeEvent(input$Violencessexuelles,{
+# 
+# output$Nb_victimes_VS<-renderHighchart({
+#   
+#   highchartFunction(ViolencesSexuelles()$Nb_violences_sexuelles,'column',ChoixCouleursBar[1:length(unique(ViolencesSexuelles()$Nb_violences_sexuelles$Indicateurs))],
+#                          
+#                          hcaes(x=as.character(unite_temps),y=RoundValuesFunction(value),group=Indicateurs),"stacking",EnableLabels=TRUE,
+#                          
+#                          HEADER=unique(ViolencesSexuelles()$Nb_violences_sexuelles$titre),
+# 
+#                          FormatLabelsData="Indicateurs",InfosPlus="Année")
+#       
+#       
+#   })
+#     
+#     
+#     
+# output$mec_VS<-renderHighchart({
+# 
+#     highchartFunction(ViolencesSexuelles()$mec_VS,'pie',ChoixCouleurs,
+#                          
+#                          hcaes(x=as.character(unite_temps),y=RoundValuesFunction(value)),"NDonut",
+#                          
+#                          HEADER=unique(ViolencesSexuelles()$mec_VS$titre),
+#                          
+#                          FormatLabelsData="Indicateurs",InfosPlus="Année")  
+#       
+#       
+#   })
+#     
+#     
+# output$repartition_VS<-renderHighchart({
+# 
+#       highchartFunction(ViolencesSexuelles()$repartition_VS,'pie',ChoixCouleurs,
+#                          
+#                          hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"PPIE",
+#                          
+#                          HEADER=unique(ViolencesSexuelles()$repartition_VS$titre),
+#                          
+#                          FormatLabelsData="Indicateurs") 
+#       
+#       
+# })
+#     
+# 
+# 
+# },ignoreInit=FALSE,ignoreNULL=FALSE)
   
 
   

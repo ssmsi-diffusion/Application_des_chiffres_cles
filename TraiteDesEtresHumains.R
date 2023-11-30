@@ -53,7 +53,7 @@ teh_server<-function(input,output,session){
     ))
     
     
-},ignoreInit=FALSE,ignoreNULL=FALSE)
+},ignoreNULL=FALSE)
   
  
 output$traite_etres_humains_UI<-renderUI({ 
@@ -93,90 +93,170 @@ output$traite_etres_humains_UI<-renderUI({
   })
   
   
-observeEvent(input$Traiteetexploitationdesetreshumains,{
-    
-
 output$evol_nb_teh<-renderHighchart({
-      
-      highchartFunction(TehData()$evol_nb_teh,'line',ChoixCouleursBar[1],
-                         
-                         hcaes(x=as.character(unite_temps),y=as.numeric(value)),"IntegerValues",
-                         
-                         HEADER=unique(TehData()$evol_nb_teh$titre),
-                         
-                         FormatLabelsData="unite_temps")
-      
-      
-      
-  })
-    
   
+  highchartFunction(TehData()$evol_nb_teh,'line',ChoixCouleursBar[1],
+                    
+                    hcaes(x=as.character(unite_temps),y=as.numeric(value)),"IntegerValues",
+                    
+                    HEADER=unique(TehData()$evol_nb_teh$titre),
+                    
+                    FormatLabelsData="unite_temps")
+  
+  
+  
+})
+
+
 
 output$repart_victimes_accompagnees<-renderHighchart({
-      
-      highchartFunction(TehData()$repart_vcitmes_accompagnnes_teh,'pie',ChoixCouleurs,
-                         
-                         hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"PPIE",
-                         
-                         HEADER=unique(TehData()$repart_vcitmes_accompagnnes_teh$titre),
-                         
-                         FormatLabelsData="Indicateurs")
-      
-
-})
-    
   
+  highchartFunction(TehData()$repart_vcitmes_accompagnnes_teh,'pie',ChoixCouleurs,
+                    
+                    hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"PPIE",
+                    
+                    HEADER=unique(TehData()$repart_vcitmes_accompagnnes_teh$titre),
+                    
+                    FormatLabelsData="Indicateurs")
+  
+  
+})
+
+
 output$repart_teh<-renderHighchart({
   
-      highchartFunction(TehData()$repartition_teh,'pie',ChoixCouleurs,
-                         
-                         hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"PPIE",
-                         
-                         HEADER=unique(TehData()$nb_mec_teh$titre),
-                         
-                         FormatLabelsData="Indicateurs")
-      
-      
-      
-    })
-    
-    
-    
-    
-    #####################################################################################################################
-    
-output$profil_victimes_part_femmes_admin<-renderHighchart({
-      
-      highchartFunction(TehData()$part_femmes_victimes_admin,'column',ChoixCouleursBar[1:length(unique(TehData()$part_femmes_victimes_admin$statistiques))],
-                         
-                         hcaes(x=as.character(sous_indicateurs),y=as.numeric(value)),"P",
-                         
-                         HEADER=unique(TehData()$part_femmes_victimes_admin$titre),
-                         
-                         FormatLabelsData="sous_indicateurs")
-      
-      
-      
-    })
-    
-    
-    output$profil_victimes_part_femmes_asso<-renderHighchart({
-      
-      highchartFunction(TehData()$part_femmes_victimes_asso,'column',ChoixCouleursBar[1:length(unique(TehData()$part_femmes_victimes_asso$statistiques))],
-                         
-                         hcaes(x=as.character(sous_indicateurs),y=as.numeric(value)),"P",
-                         
-                         HEADER=unique(TehData()$part_femmes_victimes_asso$titre),
-                         
-                         FormatLabelsData="sous_indicateurs")
-      
-      
-      
-    })
-    
+  highchartFunction(TehData()$repartition_teh,'pie',ChoixCouleurs,
+                    
+                    hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"PPIE",
+                    
+                    HEADER=unique(TehData()$nb_mec_teh$titre),
+                    
+                    FormatLabelsData="Indicateurs")
+  
+  
+  
+})
 
-    
-},ignoreInit=FALSE,ignoreNULL=FALSE)
+
+
+
+#####################################################################################################################
+
+output$profil_victimes_part_femmes_admin<-renderHighchart({
+  
+  highchartFunction(TehData()$part_femmes_victimes_admin,'column',ChoixCouleursBar[1:length(unique(TehData()$part_femmes_victimes_admin$statistiques))],
+                    
+                    hcaes(x=as.character(sous_indicateurs),y=as.numeric(value)),"P",
+                    
+                    HEADER=unique(TehData()$part_femmes_victimes_admin$titre),
+                    
+                    FormatLabelsData="sous_indicateurs")
+  
+  
+  
+})
+
+
+output$profil_victimes_part_femmes_asso<-renderHighchart({
+  
+  highchartFunction(TehData()$part_femmes_victimes_asso,'column',ChoixCouleursBar[1:length(unique(TehData()$part_femmes_victimes_asso$statistiques))],
+                    
+                    hcaes(x=as.character(sous_indicateurs),y=as.numeric(value)),"P",
+                    
+                    HEADER=unique(TehData()$part_femmes_victimes_asso$titre),
+                    
+                    FormatLabelsData="sous_indicateurs")
+  
+  
+  
+})
+
+
+
+
+# observeEvent(input$Traiteetexploitationdesetreshumains,{
+#     
+# output$evol_nb_teh<-renderHighchart({
+#       
+#       highchartFunction(TehData()$evol_nb_teh,'line',ChoixCouleursBar[1],
+#                          
+#                          hcaes(x=as.character(unite_temps),y=as.numeric(value)),"IntegerValues",
+#                          
+#                          HEADER=unique(TehData()$evol_nb_teh$titre),
+#                          
+#                          FormatLabelsData="unite_temps")
+#       
+#       
+#       
+#   })
+#     
+#   
+# 
+# output$repart_victimes_accompagnees<-renderHighchart({
+#       
+#       highchartFunction(TehData()$repart_vcitmes_accompagnnes_teh,'pie',ChoixCouleurs,
+#                          
+#                          hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"PPIE",
+#                          
+#                          HEADER=unique(TehData()$repart_vcitmes_accompagnnes_teh$titre),
+#                          
+#                          FormatLabelsData="Indicateurs")
+#       
+# 
+# })
+#     
+#   
+# output$repart_teh<-renderHighchart({
+#   
+#       highchartFunction(TehData()$repartition_teh,'pie',ChoixCouleurs,
+#                          
+#                          hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"PPIE",
+#                          
+#                          HEADER=unique(TehData()$nb_mec_teh$titre),
+#                          
+#                          FormatLabelsData="Indicateurs")
+#       
+#       
+#       
+#     })
+#     
+#     
+#     
+#     
+#     #####################################################################################################################
+#     
+# output$profil_victimes_part_femmes_admin<-renderHighchart({
+#       
+#       highchartFunction(TehData()$part_femmes_victimes_admin,'column',ChoixCouleursBar[1:length(unique(TehData()$part_femmes_victimes_admin$statistiques))],
+#                          
+#                          hcaes(x=as.character(sous_indicateurs),y=as.numeric(value)),"P",
+#                          
+#                          HEADER=unique(TehData()$part_femmes_victimes_admin$titre),
+#                          
+#                          FormatLabelsData="sous_indicateurs")
+#       
+#       
+#       
+#     })
+#     
+#     
+#     output$profil_victimes_part_femmes_asso<-renderHighchart({
+#       
+#       highchartFunction(TehData()$part_femmes_victimes_asso,'column',ChoixCouleursBar[1:length(unique(TehData()$part_femmes_victimes_asso$statistiques))],
+#                          
+#                          hcaes(x=as.character(sous_indicateurs),y=as.numeric(value)),"P",
+#                          
+#                          HEADER=unique(TehData()$part_femmes_victimes_asso$titre),
+#                          
+#                          FormatLabelsData="sous_indicateurs")
+#       
+#       
+#       
+# })
+#     
+# 
+#     
+# },ignoreInit=FALSE,ignoreNULL=FALSE)
   
 
 

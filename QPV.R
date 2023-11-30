@@ -42,58 +42,106 @@ qpv_server<-function(input,output,session){
     
   })
   
+ 
   
-observeEvent(input$Quartiersprioritairesdelapolitiquedelaville,{
-    
 output$Nb_infraction_qpv<-renderHighchart({
-      
-      highchartFunction(qpv()$Nb_infraction_qpv,'column',c("#FF7F00"),
-                         
-                         hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"N",
-                         
-                         HEADER=unique(qpv()$Nb_infraction_qpv$titre),
-                         
-                         FormatLabelsData="Indicateurs")
-      
-      
-    })
+    
+    highchartFunction(qpv()$Nb_infraction_qpv,'column',c("#FF7F00"),
+                      
+                      hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"N",
+                      
+                      HEADER=unique(qpv()$Nb_infraction_qpv$titre),
+                      
+                      FormatLabelsData="Indicateurs")
+    
+    
+  })
+  
+  
+  
+  output$Nb_mec_qpv<-renderHighchart({
+    
+    highchartFunction(qpv()$Nb_mec_qpv,'bar',c("#0daaf3"),
+                      
+                      hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"N",
+                      
+                      HEADER=unique(qpv()$Nb_mec_qpv$titre),
+                      
+                      FormatLabelsData="Indicateurs")
+    
+    
+  })
+  
+  
+  
+  output$prop_victimes_qpv<-renderHighchart({
+    
+    highchartFunction(PropVictimeMecQPV(),'bar',ChoixCouleursBar[1:length(unique(PropVictimeMecQPV()$sous_indicateurs))],
+                      
+                      hcaes(x=as.character(Indicateurs),y=as.numeric(value),group=sous_indicateurs),"stacking",EnableLabels=TRUE,
+                      
+                      HEADER=unique(PropVictimeMecQPV()$titre),
+                      
+                      FormatLabelsData="sous_indicateurs",InfosPlus="Indicateur")
     
     
     
-output$Nb_mec_qpv<-renderHighchart({
+    
+    
+  }) 
 
-      highchartFunction(qpv()$Nb_mec_qpv,'bar',c("#0daaf3"),
-                         
-                         hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"N",
-                         
-                         HEADER=unique(qpv()$Nb_mec_qpv$titre),
-                         
-                         FormatLabelsData="Indicateurs")
-      
-
-    })
-    
-    
-    
-output$prop_victimes_qpv<-renderHighchart({
-      
-      highchartFunction(PropVictimeMecQPV(),'bar',ChoixCouleursBar[1:length(unique(PropVictimeMecQPV()$sous_indicateurs))],
-                         
-                         hcaes(x=as.character(Indicateurs),y=as.numeric(value),group=sous_indicateurs),"stacking",EnableLabels=TRUE,
-                         
-                         HEADER=unique(PropVictimeMecQPV()$titre),
-                         
-                         FormatLabelsData="sous_indicateurs",InfosPlus="Indicateur")
-      
-      
-      
-      
-      
-    })
-    
-    
-    
-},ignoreNULL=FALSE)
+  
+# observeEvent(input$Quartiersprioritairesdelapolitiquedelaville,{
+#     
+# output$Nb_infraction_qpv<-renderHighchart({
+#       
+#       highchartFunction(qpv()$Nb_infraction_qpv,'column',c("#FF7F00"),
+#                          
+#                          hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"N",
+#                          
+#                          HEADER=unique(qpv()$Nb_infraction_qpv$titre),
+#                          
+#                          FormatLabelsData="Indicateurs")
+#       
+#       
+#     })
+#     
+#     
+#     
+# output$Nb_mec_qpv<-renderHighchart({
+# 
+#       highchartFunction(qpv()$Nb_mec_qpv,'bar',c("#0daaf3"),
+#                          
+#                          hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"N",
+#                          
+#                          HEADER=unique(qpv()$Nb_mec_qpv$titre),
+#                          
+#                          FormatLabelsData="Indicateurs")
+#       
+# 
+#     })
+#     
+#     
+#     
+# output$prop_victimes_qpv<-renderHighchart({
+#       
+#       highchartFunction(PropVictimeMecQPV(),'bar',ChoixCouleursBar[1:length(unique(PropVictimeMecQPV()$sous_indicateurs))],
+#                          
+#                          hcaes(x=as.character(Indicateurs),y=as.numeric(value),group=sous_indicateurs),"stacking",EnableLabels=TRUE,
+#                          
+#                          HEADER=unique(PropVictimeMecQPV()$titre),
+#                          
+#                          FormatLabelsData="sous_indicateurs",InfosPlus="Indicateur")
+#       
+#       
+#       
+#       
+#       
+# })
+#     
+#     
+#     
+# },ignoreNULL=FALSE)
   
   
   

@@ -1,0 +1,102 @@
+
+.btn-boutonGroup.btn {color:#000;padding:10px auto;background-color:#fff;width:350px;border:1px solid #b2b2b2;font-weight:normal;}
+.btn-boutonGroup.btn:hover {color: #000;background-color:#b2b2b2;border:1px solid #b2b2b2;}
+.btn-boutonGroup.active {color: #000;background-color:#b2b2b2;border:1px solid #b2b2b2;}
+  
+.shiny-output-error {visibility: hidden;}
+.shiny-output-error:before {visibility:hidden;}
+
+.box{
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color:#fff;
+  border:1px solid #ecf0f1;
+  border-radius:5px;
+  height:600px;
+}
+
+ @media screen and (max-width:641px) {
+  .box{
+   height:unset;
+  }
+}
+            
+ html {
+   position:relative;
+   min-height: 100%;}
+          
+body {
+ margin-bottom: 200px;}
+          
+
+.container-fluid {
+ margin: 0;
+ padding: 0;
+ overflow-x: hidden;
+
+} 
+
+
+.selectize-input{padding-right:40px;}
+
+.navigation{display:flex;align-items:center;padding:0;}
+
+.navigation li{padding-right:12px;}
+ 
+.navigation li a {color:green;font-size:18px;}
+ 
+.navigation li a:hover{color:#000;text-decoration:none;}
+ 
+.navigation li .selectize-input .item{color:#000;font-size:18px;font-weight:normal;}
+
+
+.selectize-input{font-size:16px;}
+  
+
+
+
+.dataTables_scrollHead{
+    border-left:1px solid #C0C0C0 !important;
+    border-right:1px solid #C0C0C0 !important;
+    background-color:#1a2980;}
+
+
+.dataTables_scrollBody{
+ border-bottom:1px solid #C0C0C0 !important;
+ border-left:1px solid #C0C0C0;
+ border-right:1px solid #C0C0C0;}
+
+
+thead tr th {
+  border-bottom:none !important; 
+}
+
+
+
+ul li{list-style: none;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

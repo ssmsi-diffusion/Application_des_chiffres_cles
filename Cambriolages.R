@@ -37,96 +37,179 @@ cambriolagesData<-eventReactive(input$Cambriolages,{
 },ignoreNULL=FALSE)
   
   
-  
-  
-observeEvent(input$Cambriolages,{
-    output$cambriolage_ui<-renderUI({
-      tagList(
-        
-        outside_container(
-
-          BoxForChart(Button('cambriolage_a'),highchartOutput("Nb_cambriolages_logements")),  
-
-          SingleValueChart(Button('cambriolage_b'),cambriolagesData()$mec_cambriolages_logements)
-          
-          
-          ),
-        
-        
-        
-        outside_container(
-
-          BoxForChart(Button('cambriolage_c'),highchartOutput("repartition_cambriolages"),source="enq"),
-          
-          BoxForChart(Button('cambriolage_d'),highchartOutput("menages_cambriolage"),source="enq")
-          
-          
-          
-          ),
-        
-        outside_container(
-
-        SingleValueChart(Button('cambriolage_e'),cambriolagesData()$taux_plainte_cambriolages %>% filter(Indicateurs==sort(unique(cambriolagesData()$taux_plainte_cambriolages$Indicateurs))[1]),source="enq"),
-        
-        SingleValueChart(Button('cambriolage_f'),cambriolagesData()$taux_plainte_cambriolages %>% filter(Indicateurs==sort(unique(cambriolagesData()$taux_plainte_cambriolages$Indicateurs))[2]),source="enq")
-        
-          
-        ))
- })
+output$cambriolage_ui<-renderUI({
+  tagList(
     
-    
-output$Nb_cambriolages_logements<-renderHighchart({
+    outside_container(
       
-  highchartFunction(cambriolagesData()$Nb_cambriolages_logements,'line',c("#3497db"),
-                     
-                     hcaes(x=as.character(unite_temps),y=as.numeric(value)),"IntegerValues",
-                     
-                     HEADER=unique(cambriolagesData()$Nb_cambriolages_logements$titre), 
-                     
-                     FormatLabelsData="unite_temps")
-
+      BoxForChart(Button('cambriolage_a'),highchartOutput("Nb_cambriolages_logements")),  
+      
+      SingleValueChart(Button('cambriolage_b'),cambriolagesData()$mec_cambriolages_logements)
+      
+      
+    ),
+    
+    
+    
+    outside_container(
+      
+      BoxForChart(Button('cambriolage_c'),highchartOutput("repartition_cambriolages"),source="enq"),
+      
+      BoxForChart(Button('cambriolage_d'),highchartOutput("menages_cambriolage"),source="enq")
+      
+      
+      
+    ),
+    
+    outside_container(
+      
+      SingleValueChart(Button('cambriolage_e'),cambriolagesData()$taux_plainte_cambriolages %>% filter(Indicateurs==sort(unique(cambriolagesData()$taux_plainte_cambriolages$Indicateurs))[1]),source="enq"),
+      
+      SingleValueChart(Button('cambriolage_f'),cambriolagesData()$taux_plainte_cambriolages %>% filter(Indicateurs==sort(unique(cambriolagesData()$taux_plainte_cambriolages$Indicateurs))[2]),source="enq")
+      
+      
+    ))
 })
-    
 
 
-    
-    
+output$Nb_cambriolages_logements<-renderHighchart({
+  
+  highchartFunction(cambriolagesData()$Nb_cambriolages_logements,'line',c("#3497db"),
+                    
+                    hcaes(x=as.character(unite_temps),y=as.numeric(value)),"IntegerValues",
+                    
+                    HEADER=unique(cambriolagesData()$Nb_cambriolages_logements$titre), 
+                    
+                    FormatLabelsData="unite_temps")
+  
+})
+
+
+
+
+
 output$repartition_cambriolages<-renderHighchart({
-
+  
   highchartFunction(cambriolagesData()$repartition_cambriolages,'pie',ChoixCouleurs,
-                     
-                     hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"PPIE",
-                     
-                     HEADER=unique(cambriolagesData()$repartition_cambriolages$titre),
-                     
+                    
+                    hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"PPIE",
+                    
+                    HEADER=unique(cambriolagesData()$repartition_cambriolages$titre),
+                    
                     FormatLabelsData="Indicateurs")
   
   
   
   
   
-    })
-    
-    
+})
+
+
 
 output$menages_cambriolage<-renderHighchart({
-      Multiaxe(
-        cambriolagesData()$pro_et_nb_menages_cambriolages,
-        cambriolagesData()$Nb_menages_camb,
-        cambriolagesData()$prop_menages_camb,
-        cambriolagesData()$pro_et_nb_menages_cambriolages$unite_temps,
-        c("column","line"),
-        c("#3497db","#FF7F00"))
+  Multiaxe(
+    cambriolagesData()$pro_et_nb_menages_cambriolages,
+    cambriolagesData()$Nb_menages_camb,
+    cambriolagesData()$prop_menages_camb,
+    cambriolagesData()$pro_et_nb_menages_cambriolages$unite_temps,
+    c("column","line"),
+    c("#3497db","#FF7F00"))
   
-  })
-    
+})  
+  
 
 
 
 
-
-
-},ignoreNULL=FALSE)
+# observeEvent(input$Cambriolages,{
+#   
+#     output$cambriolage_ui<-renderUI({
+#       tagList(
+#         
+#         outside_container(
+# 
+#           BoxForChart(Button('cambriolage_a'),highchartOutput("Nb_cambriolages_logements")),  
+# 
+#           SingleValueChart(Button('cambriolage_b'),cambriolagesData()$mec_cambriolages_logements)
+#           
+#           
+#           ),
+#         
+#         
+#         
+#         outside_container(
+# 
+#           BoxForChart(Button('cambriolage_c'),highchartOutput("repartition_cambriolages"),source="enq"),
+#           
+#           BoxForChart(Button('cambriolage_d'),highchartOutput("menages_cambriolage"),source="enq")
+#           
+#           
+#           
+#           ),
+#         
+#         outside_container(
+# 
+#         SingleValueChart(Button('cambriolage_e'),cambriolagesData()$taux_plainte_cambriolages %>% filter(Indicateurs==sort(unique(cambriolagesData()$taux_plainte_cambriolages$Indicateurs))[1]),source="enq"),
+#         
+#         SingleValueChart(Button('cambriolage_f'),cambriolagesData()$taux_plainte_cambriolages %>% filter(Indicateurs==sort(unique(cambriolagesData()$taux_plainte_cambriolages$Indicateurs))[2]),source="enq")
+#         
+#           
+#         ))
+#  })
+#     
+#     
+# output$Nb_cambriolages_logements<-renderHighchart({
+#       
+#   highchartFunction(cambriolagesData()$Nb_cambriolages_logements,'line',c("#3497db"),
+#                      
+#                      hcaes(x=as.character(unite_temps),y=as.numeric(value)),"IntegerValues",
+#                      
+#                      HEADER=unique(cambriolagesData()$Nb_cambriolages_logements$titre), 
+#                      
+#                      FormatLabelsData="unite_temps")
+# 
+# })
+#     
+# 
+# 
+#     
+#     
+# output$repartition_cambriolages<-renderHighchart({
+# 
+#   highchartFunction(cambriolagesData()$repartition_cambriolages,'pie',ChoixCouleurs,
+#                      
+#                      hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"PPIE",
+#                      
+#                      HEADER=unique(cambriolagesData()$repartition_cambriolages$titre),
+#                      
+#                     FormatLabelsData="Indicateurs")
+#   
+#   
+#   
+#   
+#   
+#     })
+#     
+#     
+# 
+# output$menages_cambriolage<-renderHighchart({
+#       Multiaxe(
+#         cambriolagesData()$pro_et_nb_menages_cambriolages,
+#         cambriolagesData()$Nb_menages_camb,
+#         cambriolagesData()$prop_menages_camb,
+#         cambriolagesData()$pro_et_nb_menages_cambriolages$unite_temps,
+#         c("column","line"),
+#         c("#3497db","#FF7F00"))
+#   
+#   })
+#     
+# 
+# 
+# 
+# 
+# 
+# 
+# },ignoreNULL=FALSE)
   
   
 

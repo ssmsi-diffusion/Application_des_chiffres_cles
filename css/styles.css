@@ -1,0 +1,307 @@
+
+/*********************************************************************/
+/******************* Variables **************************************/
+/*********************************************************************/
+
+:root{  
+
+--color-grands-boutons-cards-header-admin:#000091;
+
+--color-grands-boutons-cards-header-enq:#fc5d00;
+
+--background-color-grands-boutons-cards-header:#ececfe;
+
+--border-grands-boutons-cards-header:1px solid #ececfe;
+
+}
+
+
+/********************************************************************/
+/**************************** Page d'accueil ***********************/
+/*******************************************************************/
+
+.card-header-page-accueil{
+ padding:10px 10px;
+ border:1px solid #273961;
+ background-color:#273961;
+ color:#fff;
+ font-weight:bold;
+ text-align:start;}
+
+/***** Boutons à l'intérieur des cards de la page d'accueil ***********/
+
+.card-body .btn{
+  width:100%;
+  text-align:start;
+  margin:10px auto;
+  white-space:normal;
+  background-color:#fff;
+  color:#000;
+  border:1px solid #C0C0C0;
+  padding:10px 10px;
+  transition: width .3s, height .3s, transform .3s;}
+               
+.card-body .btn:hover{
+   transform:scale(1.05);
+   background-color:#fff;
+   color:#000;
+  }
+
+.card-body .btn:hover, .card-body .btn:active, .card-body .btn:visited, .card-body .btn:link{text-decoration:none;background-color:#fff;border:1px solid #C0C0C0;}
+
+
+@media screen and (max-width:767px) {
+
+   .card-body .btn:hover{
+    transform:none;
+  }
+
+ } 
+
+/**************CSS des grands boutons dans la page d'accueil *************/
+
+ #admin-button{
+   background-color:var(--background-color-grands-boutons-cards-header);
+   color:var(--color-grands-boutons-cards-header-admin);
+   border:1px solid #ececfe;
+   text-align:center;height:60px;
+}
+
+ #enq-button{
+  background-color:var(--background-color-grands-boutons-cards-header);
+  color:var(--color-grands-boutons-cards-header-enq);
+  border:1px solid #ececfe;
+  text-align:center;height:60px;
+}
+
+.bouton-infos{text-decoration:underline;}
+
+.infobutton-admin .btn-default{margin:5px 5px;background-color:#fff;border-color:#fff;}
+
+.infobutton-admin .btn-default:hover, 
+ .infobutton-admin .btn-default:active, 
+ .infobutton-admin .btn-default:visited, 
+ .infobutton-admin .btn-default:link, 
+ .infobutton-admin .btn-default:focus{
+  text-decoration:none;background-color:#fff;border-color:#fff;}
+
+.infobutton-enq .btn-default{margin:5px 5px;background-color:#fff;border-color:#fff;} 
+
+.infobutton-enq .btn-default:hover, .infobutton-enq .btn-default:active, .infobutton-enq .btn-default:visited, .infobutton-enq .btn-default:link, .infobutton-enq .btn-default:focus{text-decoration:none;background-color:#fff;border-color:#fff;}
+
+
+
+/*******************************/
+/****** Boutons-groupés *******/
+/******************************/
+
+.btn-boutonGroup.btn {
+  border:1px solid #77B5FE;
+  background-color:#fff;
+  padding:10px auto;
+  margin-bottom:15px;
+  width:350px;
+  font-weight:normal;}
+
+.btn-boutonGroup.btn:hover {
+ border:1px solid transparent;
+ background-color:#77B5FE;
+ font-weight:normal; 
+}
+
+.btn-boutonGroup.active {
+ border:1px solid transparent;
+ background-color:#77B5FE;
+ font-weight:normal; 
+}
+
+
+@media screen and (max-width:1113px){
+
+.btn-boutonGroup.btn{margin-top:15px;}
+
+}
+
+
+
+/******* Mise en formes des tables ****/
+
+.dataTables_scrollHead{
+    border-left:1px solid #C0C0C0 !important;
+    border-right:1px solid #C0C0C0 !important;
+    background-color:#1a2980;}
+
+
+.dataTables_scrollBody{
+ border-bottom:1px solid #C0C0C0 !important;
+ border-left:1px solid #C0C0C0;
+ border-right:1px solid #C0C0C0;}
+
+
+thead tr th {
+  border-bottom:none !important; 
+}
+
+
+
+
+/******* Fenêtre d'informations ******/
+
+.modal-body a{text-decoration:underline;}
+
+.modal-dialog{padding-top:90px;}
+
+
+/**************************************************/
+/**** Garder le footer tout en bas de la page ****/
+/**************************************************/
+
+ html {
+   position:relative;
+   min-height: 100%;}
+          
+body {
+ margin-bottom: 200px;}
+          
+
+.container-fluid {
+ margin: 0;
+ padding: 0;
+ overflow-x: hidden;
+
+} 
+
+/******** Highchart ********/
+
+.highchart{height:498px !important;}
+
+
+/**** div de class col-md-12 qui enveloppe les cards ****/
+
+.card-container{border:1px solid transparent;padding:0 !important;}
+
+
+
+/******** Page container pour les figures *****************/
+
+.custom-container-fluid{margin:auto 80px !important;}
+
+
+@media screen and (min-width:768px) and (max-width:1366px){
+
+ .custom-container-fluid{margin:auto 20px !important;}
+
+}
+
+
+.list-items{
+    display:flex;
+    justify-content:start;
+    align-items:center;
+    list-style:none;
+    margin:15px auto;
+    border:1px solid transparent;
+
+  }
+
+ @media only screen and (max-width:767px){
+
+     .list-items{
+
+      flex-direction:column;
+
+      justify-content:start;
+
+      align-items:start !important;
+}
+
+.custom-container-fluid{margin:auto 5px !important;} 
+  
+/*********** Mettre les SelectInput à width=100% pour les téléphone ************/
+
+.form-group{width:100% !important;}
+
+   
+/*****  supprimer l'icône de la navigation pour les téléphones ************/
+
+
+  .icon-nav{display:none;}
+
+  .accueil-nav{padding:0 !important;}
+
+  }
+
+/*********** Fin du responsive 767px ************/
+
+
+
+/*******************************************************************/
+/*********** CSS des cards qui contiennent les figures ************/
+/*******************************************************************/
+
+
+/*********** Les titres dans la page d'accueil ************/
+
+  .container .text-center h2,h4{font-weight:normal;color:#000;}
+
+
+/*********** Les sous-titres dans la page d'informations ************/
+
+  .sous-titre-liens{color:#273961;font-weight:bold;}
+
+/*********** CSS le Tooltip des figures ************/
+
+  .highcharts-tooltip span {
+    height:auto;
+    width:400px;
+    background-color:#fff;
+    overflow:auto;
+    white-space:normal !important;}
+
+/************************************************************************/
+/**************************** Footer ***********************************/
+/***********************************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

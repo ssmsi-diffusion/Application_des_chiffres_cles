@@ -175,90 +175,164 @@ Reactive_contribution_min_maj_mec_etrangers<-reactive({
   
 })
   
+
+
+output$repart_age_et_part_homme_mec_chart<-renderHighchart({
+  
+  highchartFunction(repart_age_et_part_homme_mec_react(),'column',ChoixCouleursBar[1:length(unique(repart_age_et_part_homme_mec_react()$statistiques))],
+                    
+                    hcaes(x=as.character(sous_indicateurs),y=as.numeric(value),group=statistiques),"P",
+                    
+                    HEADER=unique(repart_age_et_part_homme_mec_react()$titre),
+                    
+                    FormatLabelsData="statistiques",InfosPlus="Catégorie")
   
   
   
-observeEvent(input$Misencause,{  
+})
 
-    output$repart_age_et_part_homme_mec_chart<-renderHighchart({
 
-      highchartFunction(repart_age_et_part_homme_mec_react(),'column',ChoixCouleursBar[1:length(unique(repart_age_et_part_homme_mec_react()$statistiques))],
-                         
-                         hcaes(x=as.character(sous_indicateurs),y=as.numeric(value),group=statistiques),"P",
-                         
-                         HEADER=unique(repart_age_et_part_homme_mec_react()$titre),
-                         
-                         FormatLabelsData="statistiques",InfosPlus="Catégorie")
-      
-      
-      
-    })
-    
-    
-    output$nationalite_mec_chart<-renderHighchart({
-      
-      highchartFunction(repart_nationalite_mec_reactive(),'pie',ChoixCouleurs, 
-                         
-                         hcaes(x=as.character(sous_indicateurs),y=lapply(as.numeric(value),function(x){round(x)})),"PPIE",
-                         
-                         HEADER=unique(repart_nationalite_mec_reactive()$titre),
-                         
-                         FormatLabelsData="sous_indicateurs")
-      
-    })
-    
-    
-    
-    
-    output$evol_profil_mec<-renderHighchart({
-      
-      highchartFunction(profil_mec_evol_reactive(),'line',c("#77B5FE"),
-                         
-                         hcaes(x=as.character(unite_temps),y=as.numeric(value)),"N",
-                         
-                         HEADER=unique(profil_mec_evol_reactive()$titre),
-                         
-                         FormatLabelsData="unite_temps")
-      
-      
-      
-    })
-    
-    
+output$nationalite_mec_chart<-renderHighchart({
+  
+  highchartFunction(repart_nationalite_mec_reactive(),'pie',ChoixCouleurs, 
+                    
+                    hcaes(x=as.character(sous_indicateurs),y=lapply(as.numeric(value),function(x){round(x)})),"PPIE",
+                    
+                    HEADER=unique(repart_nationalite_mec_reactive()$titre),
+                    
+                    FormatLabelsData="sous_indicateurs")
+  
+})
 
-    
+
+
+
+output$evol_profil_mec<-renderHighchart({
+  
+  highchartFunction(profil_mec_evol_reactive(),'line',c("#77B5FE"),
+                    
+                    hcaes(x=as.character(unite_temps),y=as.numeric(value)),"N",
+                    
+                    HEADER=unique(profil_mec_evol_reactive()$titre),
+                    
+                    FormatLabelsData="unite_temps")
+  
+  
+  
+})
+
+
+
+
 output$contribution_min_maj_mec_etrangers_chart<-renderHighchart({
   
-      if(length(unique(Reactive_contribution_min_maj_mec_etrangers()$sous_indicateurs))>2  ){
-        
-        codesCouleurs<-c("#0078f3","#6a6af4","#cacafb","#fc5d00","#ffded9")
-        
-      } else {
-        
-        codesCouleurs<-c("#0078f3","#6a6af4")
-        
-      }
-      
-      highchartFunction(Reactive_contribution_min_maj_mec_etrangers(),'bar',codesCouleurs,
-                         
-                         hcaes(x=as.character(Indicateurs),y=as.numeric(value),group=sous_indicateurs),"stackingP",EnableLabels=TRUE,
-                         
-                         HEADER=unique(Reactive_contribution_min_maj_mec_etrangers()$titre),
-                         
-                         FormatLabelsData="sous_indicateurs",InfosPlus="Pays")
-      
-      
-      
-      
-      
-    })
+  if(length(unique(Reactive_contribution_min_maj_mec_etrangers()$sous_indicateurs))>2  ){
     
+    codesCouleurs<-c("#0078f3","#6a6af4","#cacafb","#fc5d00","#ffded9")
     
+  } else {
     
-
-       
+    codesCouleurs<-c("#0078f3","#6a6af4")
     
-},ignoreNULL=FALSE)
+  }
+  
+  highchartFunction(Reactive_contribution_min_maj_mec_etrangers(),'bar',codesCouleurs,
+                    
+                    hcaes(x=as.character(Indicateurs),y=as.numeric(value),group=sous_indicateurs),"stackingP",EnableLabels=TRUE,
+                    
+                    HEADER=unique(Reactive_contribution_min_maj_mec_etrangers()$titre),
+                    
+                    FormatLabelsData="sous_indicateurs",InfosPlus="Pays")
+  
+  
+  
+  
+  
+})  
+  
+  
+# observeEvent(input$Misencause,{
+#   
+# 
+#     output$repart_age_et_part_homme_mec_chart<-renderHighchart({
+# 
+#       highchartFunction(repart_age_et_part_homme_mec_react(),'column',ChoixCouleursBar[1:length(unique(repart_age_et_part_homme_mec_react()$statistiques))],
+#                          
+#                          hcaes(x=as.character(sous_indicateurs),y=as.numeric(value),group=statistiques),"P",
+#                          
+#                          HEADER=unique(repart_age_et_part_homme_mec_react()$titre),
+#                          
+#                          FormatLabelsData="statistiques",InfosPlus="Catégorie")
+#       
+#       
+#       
+#     })
+#     
+#     
+#     output$nationalite_mec_chart<-renderHighchart({
+#       
+#       highchartFunction(repart_nationalite_mec_reactive(),'pie',ChoixCouleurs, 
+#                          
+#                          hcaes(x=as.character(sous_indicateurs),y=lapply(as.numeric(value),function(x){round(x)})),"PPIE",
+#                          
+#                          HEADER=unique(repart_nationalite_mec_reactive()$titre),
+#                          
+#                          FormatLabelsData="sous_indicateurs")
+#       
+#     })
+#     
+#     
+#     
+#     
+#     output$evol_profil_mec<-renderHighchart({
+#       
+#       highchartFunction(profil_mec_evol_reactive(),'line',c("#77B5FE"),
+#                          
+#                          hcaes(x=as.character(unite_temps),y=as.numeric(value)),"N",
+#                          
+#                          HEADER=unique(profil_mec_evol_reactive()$titre),
+#                          
+#                          FormatLabelsData="unite_temps")
+#       
+#       
+#       
+#     })
+#     
+#     
+# 
+#     
+# output$contribution_min_maj_mec_etrangers_chart<-renderHighchart({
+#   
+#       if(length(unique(Reactive_contribution_min_maj_mec_etrangers()$sous_indicateurs))>2  ){
+#         
+#         codesCouleurs<-c("#0078f3","#6a6af4","#cacafb","#fc5d00","#ffded9")
+#         
+#       } else {
+#         
+#         codesCouleurs<-c("#0078f3","#6a6af4")
+#         
+#       }
+#       
+#       highchartFunction(Reactive_contribution_min_maj_mec_etrangers(),'bar',codesCouleurs,
+#                          
+#                          hcaes(x=as.character(Indicateurs),y=as.numeric(value),group=sous_indicateurs),"stackingP",EnableLabels=TRUE,
+#                          
+#                          HEADER=unique(Reactive_contribution_min_maj_mec_etrangers()$titre),
+#                          
+#                          FormatLabelsData="sous_indicateurs",InfosPlus="Pays")
+#       
+#       
+#       
+#       
+#       
+#     })
+#     
+#     
+#     
+# 
+#        
+#     
+# },ignoreNULL=FALSE)
   
 
 observeEvent(input$profil_a, {showInfo( repart_age_et_part_homme_mec_react())})

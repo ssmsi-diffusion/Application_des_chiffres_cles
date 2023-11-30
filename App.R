@@ -48,11 +48,7 @@ source("Policiersetgendarmes.R",encoding="UTF-8")
 source("Conditions_de_travail_des_fs.R",encoding="UTF-8")
 source("Delinquance_par_UU.R",encoding="UTF-8")
 source("depense_securite.R",encoding="UTF-8")
-
-#source("informations.R",encoding="UTF-8")
-
 source("admin_informations.R",encoding="UTF-8")
-
 source("enq_informations.R",encoding="UTF-8")
 
 
@@ -60,11 +56,16 @@ source("enq_informations.R",encoding="UTF-8")
 
 
 ListeSentimentInsecurite<-c("Sentiment d'insécurité")
+
+
 ListePanoramaDelinquance<-c("Homicides","Violences physiques","Traite et exploitation des êtres humains","Violences sexuelles","Discriminations et crimes de haine","Arnaques et escroqueries",
-                            "Atteintes à la probité","Infractions à la légisation sur les stupéfiants","Vols sur personne","Vols liés aux véhicules","Cambriolages","Atteintes à l'environnement et aux animaux",
+                            "Atteintes à la probité","Infractions à la législation sur les stupéfiants","Vols sur personne","Vols liés aux véhicules","Cambriolages","Atteintes à l'environnement et aux animaux",
                             "Destructions et dégradations des biens")
 
-ListeMilieuxCommission<-c("Violences intrafamiliales","Quartiers prioritaires de la politique de la ville","Délinquance dans les transports","Cyberdélinquance","Délinquance par taille d'unité urbaine")
+
+ListeMilieuxCommission<-c("Violences intrafamiliales","Quartiers prioritaires de la politique de la ville","Délinquance dans les transports","Infractions liées au numérique","Délinquance par taille d'unité urbaine")
+
+
 ListeProfessionnelsSecurite<-c("Relations population et forces de sécurité","Policiers et gendarmes","Policiers municipaux","Conditions de travail des policiers et des gendarmes","Dépenses en matière de sécurité")
 
 
@@ -98,7 +99,7 @@ FunctionBox<-function(title,list){
 
           div(class="col-md-6",liste_des_boutons[i+1]))})
 
-        )))}
+)))}
 
 
 
@@ -133,34 +134,40 @@ home_page<-div(class="container home-container",style="background-color:#fff;fle
           ))),
 
       br(),
+      
       FunctionBox("PANORAMA DE LA DÉLINQUANCE",ListePanoramaDelinquance),
       FunctionBox("LIEUX DE COMMISSION DE LA DÉLINQUANCE",ListeMilieuxCommission),
       FunctionBox("PROFESSIONNELS DE LA SÉCURITÉ",ListeProfessionnelsSecurite),
       FunctionBox("CARACTERISTIQUES DES VICTIMES ET DES MIS EN CAUSE",c("Victimes","Mis en cause")),
       FunctionBox("SENTIMENT D'INSECURITÉ",ListeSentimentInsecurite),
-      FunctionBox("ÉLÉMENT DE PROCÉDURE",c("Elucidation des faits de délinquance")),
+      FunctionBox("ÉLÉMENT DE PROCÉDURE",c("Élucidation des faits de délinquance")),
       FunctionBox("COMPARAISONS INTERNATIONALES",c("Comparaisons européennes")),
       br(),
       br(),
-      br())
+      br()
+    
+    
+
+)
+
 
 
 
 router <- make_router(
   route("/", home_page),
-  route("Homicides", homicides_ui,homicides_server),
+  route("Homicides",homicides_ui,homicides_server),
   route("Violencesphysiques",violences_physiques_ui,violences_physiques_server),
   route("Violencessexuelles",Violencessexuelles_ui,Violencessexuelles_server),
   route("Arnaquesetescroqueries",Arnaquesetescroqueries_ui,Arnaquesetescroqueries_server),
   route("Volssurpersonne",Volssurpersonne_ui,Volssurpersonne_server),
   route("Cambriolages",Cambriolages_ui,Cambriolages_server),
-  route("Infractionsalalegisationsurlesstupefiants",stupefiants_ui,stupefiants_server),
+  route("Infractionsalalegislationsurlesstupefiants",stupefiants_ui,stupefiants_server),
   route("Traiteetexploitationdesetreshumains",teh_ui,teh_server),
   route("Quartiersprioritairesdelapolitiquedelaville",qpv_ui,qpv_server),
   route("Atteintesalenvironnementetauxanimaux",atteintes_env_animaux_ui,atteintes_env_animaux_server),
   route("Volsliesauxvehicules",vols_vehicule_ui,vols_vehicule_server),
   route("Delinquancedanslestransports",delinquance_transports_ui,delinquance_transports_server),
-  route("Cyberdelinquance",cyberdelinquance_ui,cyberdelinquance_server),
+  route("Infractionslieesaunumerique",cyberdelinquance_ui,cyberdelinquance_server),
   route("Sentimentdinsecurite",insecurite_ui,insecurite_server),
   route("Comparaisonseuropeennes",comparaison_europe_ui,comparaison_europe_server),
   route("Elucidationdesfaitsdedelinquance",elucidation_ui,elucidation_server),
@@ -209,6 +216,8 @@ includeHTML('css/SSMSIFooterDV.html')
 
 )
 
+
+
 )
 
 server <- shinyServer(function(input, output, session) {
@@ -219,3 +228,8 @@ server <- shinyServer(function(input, output, session) {
 
 
 shinyApp(ui, server)
+
+
+
+
+

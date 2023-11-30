@@ -115,108 +115,205 @@ vols_vehicule_server<-function(input,output,session){
   })
   
 
-observeEvent(input$Volsliesauxvehicules,{  
-    
-#############################################################################
-### Vols de véhicules #######################################################
-#############################################################################    
-    
-    
-output$Nb_vols_vehicules<-renderHighchart({ 
- 
- highchartFunction(VolsVehicules()$Nb_vols_vehicules,'line',c("#77B5FE"),
-                     
-                     hcaes(x=as.character(unite_temps),y=as.numeric(value)),"IntegerValues",
-                     
-                     HEADER=unique(VolsVehicules()$Nb_vols_vehicules$titre),
-                     
-                     FormatLabelsData="unite_temps")
   
-      
-})   
+  output$Nb_vols_vehicules<-renderHighchart({ 
+    
+    highchartFunction(VolsVehicules()$Nb_vols_vehicules,'line',c("#77B5FE"),
+                      
+                      hcaes(x=as.character(unite_temps),y=as.numeric(value)),"IntegerValues",
+                      
+                      HEADER=unique(VolsVehicules()$Nb_vols_vehicules$titre),
+                      
+                      FormatLabelsData="unite_temps")
     
     
-output$rep_vols_vehicules<-renderHighchart({
-
-      highchartFunction(VolsVehicules()$repartition_vols_vehicules,'column',c("#77B5FE","#FF7F00"),
-                                       
-                    hcaes(x=as.character(sous_indicateurs),y=as.numeric(value),group=Indicateurs),"P",
-                     
-                     HEADER=unique(VolsVehicules()$repartition_vols_vehicules$titre),
-                     
-                     FormatLabelsData="Indicateurs",InfosPlus="Véhicule")
+  })   
   
   
-    })
+  output$rep_vols_vehicules<-renderHighchart({
+    
+    highchartFunction(VolsVehicules()$repartition_vols_vehicules,'column',c("#77B5FE","#FF7F00"),
+                      
+                      hcaes(x=as.character(sous_indicateurs),y=as.numeric(value),group=Indicateurs),"P",
+                      
+                      HEADER=unique(VolsVehicules()$repartition_vols_vehicules$titre),
+                      
+                      FormatLabelsData="Indicateurs",InfosPlus="Véhicule")
     
     
-output$tx_plainte_vols_vehicules<-renderHighchart({
-   
-      highchartFunction(VolsVehicules()$tx_plainte_vols_vehicules,'column',c("#77B5FE"),
-                         
-                         hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"P",
-                         
-                         HEADER=unique(VolsVehicules()$tx_plainte_vols_vehicules$titre), 
-                         
-                         FormatLabelsData="Indicateurs")
-      
-      
-})
+  })
+  
+  
+  output$tx_plainte_vols_vehicules<-renderHighchart({
+    
+    highchartFunction(VolsVehicules()$tx_plainte_vols_vehicules,'column',c("#77B5FE"),
+                      
+                      hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"P",
+                      
+                      HEADER=unique(VolsVehicules()$tx_plainte_vols_vehicules$titre), 
+                      
+                      FormatLabelsData="Indicateurs")
     
     
-output$Nb_et_prop_menages_vols_vehicules<-renderHighchart({
-      Nb_menages_vols_vehicules<-ractive_nb_prop_menages_vols_vehicules() %>% filter(ractive_nb_prop_menages_vols_vehicules()$statistiques=="Nombre")
-      prop_menages_vols_vehicules<-ractive_nb_prop_menages_vols_vehicules() %>% filter(ractive_nb_prop_menages_vols_vehicules()$statistiques=="Proportion de ménages victimes")
-      Multiaxe(
-        ractive_nb_prop_menages_vols_vehicules(),
-        Nb_menages_vols_vehicules,
-        prop_menages_vols_vehicules,
-        ractive_nb_prop_menages_vols_vehicules()$unite_temps,
-        c("column","line"),
-        c("#77B5FE","#FF7F00"))
-}) 
+  })
+  
+  
+  output$Nb_et_prop_menages_vols_vehicules<-renderHighchart({
+    Nb_menages_vols_vehicules<-ractive_nb_prop_menages_vols_vehicules() %>% filter(ractive_nb_prop_menages_vols_vehicules()$statistiques=="Nombre")
+    prop_menages_vols_vehicules<-ractive_nb_prop_menages_vols_vehicules() %>% filter(ractive_nb_prop_menages_vols_vehicules()$statistiques=="Proportion de ménages victimes")
+    Multiaxe(
+      ractive_nb_prop_menages_vols_vehicules(),
+      Nb_menages_vols_vehicules,
+      prop_menages_vols_vehicules,
+      ractive_nb_prop_menages_vols_vehicules()$unite_temps,
+      c("column","line"),
+      c("#77B5FE","#FF7F00"))
+  }) 
+  
+  
+  
+  
+  ##########################################################################################
+  ###  Vols dans ou sur les véhicules ######################################################
+  ##########################################################################################      
+  
+  output$Chart_NB_vols_dans_ou_sur_vehicule<-renderHighchart({
+    
+    highchartFunction(NB_vols_dans_ou_sur_vehiculeR(),'line',c("#77B5FE"),
+                      
+                      hcaes(x=as.character(unite_temps),y=as.numeric(value)),"IntegerValues",
+                      
+                      HEADER=unique(NB_vols_dans_ou_sur_vehiculeR()$titre),
+                      
+                      FormatLabelsData="unite_temps")
     
     
     
-
-##########################################################################################
-###  Vols dans ou sur les véhicules ######################################################
-##########################################################################################      
-
-output$Chart_NB_vols_dans_ou_sur_vehicule<-renderHighchart({
-
-  highchartFunction(NB_vols_dans_ou_sur_vehiculeR(),'line',c("#77B5FE"),
-                     
-                     hcaes(x=as.character(unite_temps),y=as.numeric(value)),"IntegerValues",
-                     
-                     HEADER=unique(NB_vols_dans_ou_sur_vehiculeR()$titre),
-                     
-                     FormatLabelsData="unite_temps")
+  })
+  
+  
+  
+  output$Chart_Menages_Ordinaires_VDSV<-renderHighchart({
+    NB_Menages_Ordinaires_VDSV<-VolsVehicules()$Menages_Ordinaires_VDSV %>% filter(VolsVehicules()$Menages_Ordinaires_VDSV$sous_indicateurs=="Nombre de ménages victimes")
+    Prop_Menages_Ordinaires_VDSV<-VolsVehicules()$Menages_Ordinaires_VDSV %>% filter(VolsVehicules()$Menages_Ordinaires_VDSV$sous_indicateurs=="Proportion de victimes parmi les ménages (%)")
+    Multiaxe(
+      VolsVehicules()$Menages_Ordinaires_VDSV,
+      NB_Menages_Ordinaires_VDSV,
+      Prop_Menages_Ordinaires_VDSV,
+      VolsVehicules()$Menages_Ordinaires_VDSV$unite_temps,
+      c("column","line"),
+      c("#77B5FE","#FF7F00"))
+    
+    
+  }) 
+  
+  
+  
+  
+# observeEvent(input$Volsliesauxvehicules,{  
+#     
+# #############################################################################
+# ### Vols de véhicules #######################################################
+# #############################################################################    
+#     
+#     
+# output$Nb_vols_vehicules<-renderHighchart({ 
+#  
+#  highchartFunction(VolsVehicules()$Nb_vols_vehicules,'line',c("#77B5FE"),
+#                      
+#                      hcaes(x=as.character(unite_temps),y=as.numeric(value)),"IntegerValues",
+#                      
+#                      HEADER=unique(VolsVehicules()$Nb_vols_vehicules$titre),
+#                      
+#                      FormatLabelsData="unite_temps")
+#   
+#       
+# })   
+#     
+#     
+# output$rep_vols_vehicules<-renderHighchart({
+# 
+#       highchartFunction(VolsVehicules()$repartition_vols_vehicules,'column',c("#77B5FE","#FF7F00"),
+#                                        
+#                     hcaes(x=as.character(sous_indicateurs),y=as.numeric(value),group=Indicateurs),"P",
+#                      
+#                      HEADER=unique(VolsVehicules()$repartition_vols_vehicules$titre),
+#                      
+#                      FormatLabelsData="Indicateurs",InfosPlus="Véhicule")
+#   
+#   
+#     })
+#     
+#     
+# output$tx_plainte_vols_vehicules<-renderHighchart({
+#    
+#       highchartFunction(VolsVehicules()$tx_plainte_vols_vehicules,'column',c("#77B5FE"),
+#                          
+#                          hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"P",
+#                          
+#                          HEADER=unique(VolsVehicules()$tx_plainte_vols_vehicules$titre), 
+#                          
+#                          FormatLabelsData="Indicateurs")
+#       
+#       
+# })
+#     
+#     
+# output$Nb_et_prop_menages_vols_vehicules<-renderHighchart({
+#       Nb_menages_vols_vehicules<-ractive_nb_prop_menages_vols_vehicules() %>% filter(ractive_nb_prop_menages_vols_vehicules()$statistiques=="Nombre")
+#       prop_menages_vols_vehicules<-ractive_nb_prop_menages_vols_vehicules() %>% filter(ractive_nb_prop_menages_vols_vehicules()$statistiques=="Proportion de ménages victimes")
+#       Multiaxe(
+#         ractive_nb_prop_menages_vols_vehicules(),
+#         Nb_menages_vols_vehicules,
+#         prop_menages_vols_vehicules,
+#         ractive_nb_prop_menages_vols_vehicules()$unite_temps,
+#         c("column","line"),
+#         c("#77B5FE","#FF7F00"))
+# }) 
+#     
+#     
+#     
+# 
+# ##########################################################################################
+# ###  Vols dans ou sur les véhicules ######################################################
+# ##########################################################################################      
+# 
+# output$Chart_NB_vols_dans_ou_sur_vehicule<-renderHighchart({
+# 
+#   highchartFunction(NB_vols_dans_ou_sur_vehiculeR(),'line',c("#77B5FE"),
+#                      
+#                      hcaes(x=as.character(unite_temps),y=as.numeric(value)),"IntegerValues",
+#                      
+#                      HEADER=unique(NB_vols_dans_ou_sur_vehiculeR()$titre),
+#                      
+#                      FormatLabelsData="unite_temps")
+#   
+#   
+# 
+#     })
+#     
+#     
+#     
+# output$Chart_Menages_Ordinaires_VDSV<-renderHighchart({
+#       NB_Menages_Ordinaires_VDSV<-VolsVehicules()$Menages_Ordinaires_VDSV %>% filter(VolsVehicules()$Menages_Ordinaires_VDSV$sous_indicateurs=="Nombre de ménages victimes")
+#       Prop_Menages_Ordinaires_VDSV<-VolsVehicules()$Menages_Ordinaires_VDSV %>% filter(VolsVehicules()$Menages_Ordinaires_VDSV$sous_indicateurs=="Proportion de victimes parmi les ménages (%)")
+#       Multiaxe(
+#         VolsVehicules()$Menages_Ordinaires_VDSV,
+#         NB_Menages_Ordinaires_VDSV,
+#         Prop_Menages_Ordinaires_VDSV,
+#         VolsVehicules()$Menages_Ordinaires_VDSV$unite_temps,
+#         c("column","line"),
+#         c("#77B5FE","#FF7F00"))
+# 
+# 
+# }) 
+#     
+# 
+# },ignoreInit=FALSE,ignoreNULL=FALSE)
   
   
 
-    })
-    
-    
-    
-output$Chart_Menages_Ordinaires_VDSV<-renderHighchart({
-      NB_Menages_Ordinaires_VDSV<-VolsVehicules()$Menages_Ordinaires_VDSV %>% filter(VolsVehicules()$Menages_Ordinaires_VDSV$sous_indicateurs=="Nombre de ménages victimes")
-      Prop_Menages_Ordinaires_VDSV<-VolsVehicules()$Menages_Ordinaires_VDSV %>% filter(VolsVehicules()$Menages_Ordinaires_VDSV$sous_indicateurs=="Proportion de victimes parmi les ménages (%)")
-      Multiaxe(
-        VolsVehicules()$Menages_Ordinaires_VDSV,
-        NB_Menages_Ordinaires_VDSV,
-        Prop_Menages_Ordinaires_VDSV,
-        VolsVehicules()$Menages_Ordinaires_VDSV$unite_temps,
-        c("column","line"),
-        c("#77B5FE","#FF7F00"))
 
-
-}) 
-    
-
-},ignoreInit=FALSE,ignoreNULL=FALSE)
-  
-  
 observeEvent(input$vv_a, {showInfo(VolsVehicules()$Nb_vols_vehicules)})
   
 observeEvent(input$vv_b, {showInfo(VolsVehicules()$repartition_vols_vehicules)})

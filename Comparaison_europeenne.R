@@ -40,60 +40,112 @@ ReactiveCI<-reactive({
 })
   
   
+output$CI_taux_100hbts<-renderHighchart({
   
-observeEvent(input$Comparaisonseuropeennes,{
-
-    output$CI_taux_100hbts<-renderHighchart({
-      
-      DataFinale <- ReactiveCI()[order(ReactiveCI()$value),] 
-      
-      highchart() %>%
-        
-        hc_exporting(enabled = TRUE,sourceWidth=1300,sourceHeight=700,formAttributes = list(target = "_blank"),
-                     buttons=list(
-                       contextButton=list(
-                         y=23,
-                         x=0,
-                         text= "Télécharger",
-                         menuItems=DowloadChart,
-                         symbol=''))) %>%
-        
-        hc_add_series(data = DataFinale,hcaes(x=sous_indicateurs,y=as.numeric(value),color = color_choice), 
-                      
-                      type = 'column',
-                      
-                      name=unique(DataFinale$titre),showInLegend = FALSE,
-                      
-                      dataLabels = list(enabled = TRUE,format = "{point.y:,.1f}"))  %>%
-        
-        hc_xAxis(type="category",labels=list(enabled=TRUE),title=list(text=""),tickmarkPlacement='on',tickInterval=1) %>%
-        
-        #hc_xAxis(labels=list(enabled=TRUE),title=list(text="Pays"),tickmarkPlacement='on',tickInterval=1) %>%
-        
-        hc_title(text=ifelse(length(unique(DataFinale$unite_temps))>1,paste0(unique(DataFinale$titre)),paste0(unique(DataFinale$titre)," ","(",unique(DataFinale$unite_temps),")") ),
-                 margin = 20, align = "left",
-                 style = list(color = "#000000",fontWeight = "normal",fontSize='13px',useHTML = TRUE)) %>%
-        
-        hc_plotOptions(series = list(
-          dataLabels = list(enabled=FALSE,style=list(color="#000000")),marker=list(enabled=FALSE),
-          animation=FALSE,
-          allowOverlap=TRUE,
-          enableMouseTracking = TRUE))%>%
-        
-        hc_caption(
-          text = str_c("Champ : ",unique(DataFinale$champ),
-                       "<br/> Source :",unique(DataFinale$source),
-                       "<br/> Unité de compte :",unique(DataFinale$unite_de_compte),
-                       "<br/> Lecture :",ifelse(is.na(unique(DataFinale$Lecture)),"Note de lecture",unique(DataFinale$Lecture)),
-                       sep = " "),
-          style = list(fontWeight = "normal",fontSize = "11px"),
-          align = "left",verticalAlign = 'bottom'
-          
-        ) 
-      
-    })
+  DataFinale <- ReactiveCI()[order(ReactiveCI()$value),] 
+  
+  highchart() %>%
     
-  },ignoreNULL=FALSE)
+    hc_exporting(enabled = TRUE,sourceWidth=1300,sourceHeight=700,formAttributes = list(target = "_blank"),
+                 buttons=list(
+                   contextButton=list(
+                     y=23,
+                     x=0,
+                     text= "Télécharger",
+                     menuItems=DowloadChart,
+                     symbol=''))) %>%
+    
+    hc_add_series(data = DataFinale,hcaes(x=sous_indicateurs,y=as.numeric(value),color = color_choice), 
+                  
+                  type = 'column',
+                  
+                  name=unique(DataFinale$titre),showInLegend = FALSE,
+                  
+                  dataLabels = list(enabled = TRUE,format = "{point.y:,.1f}"))  %>%
+    
+    hc_xAxis(type="category",labels=list(enabled=TRUE),title=list(text=""),tickmarkPlacement='on',tickInterval=1) %>%
+    
+    #hc_xAxis(labels=list(enabled=TRUE),title=list(text="Pays"),tickmarkPlacement='on',tickInterval=1) %>%
+    
+    hc_title(text=ifelse(length(unique(DataFinale$unite_temps))>1,paste0(unique(DataFinale$titre)),paste0(unique(DataFinale$titre)," ","(",unique(DataFinale$unite_temps),")") ),
+             margin = 20, align = "left",
+             style = list(color = "#000000",fontWeight = "normal",fontSize='13px',useHTML = TRUE)) %>%
+    
+    hc_plotOptions(series = list(
+      dataLabels = list(enabled=FALSE,style=list(color="#000000")),marker=list(enabled=FALSE),
+      animation=FALSE,
+      allowOverlap=TRUE,
+      enableMouseTracking = TRUE))%>%
+    
+    hc_caption(
+      text = str_c("Champ : ",unique(DataFinale$champ),
+                   "<br/> Source :",unique(DataFinale$source),
+                   "<br/> Unité de compte :",unique(DataFinale$unite_de_compte),
+                   "<br/> Lecture :",ifelse(is.na(unique(DataFinale$Lecture)),"Note de lecture",unique(DataFinale$Lecture)),
+                   sep = " "),
+      style = list(fontWeight = "normal",fontSize = "11px"),
+      align = "left",verticalAlign = 'bottom'
+      
+    ) 
+  
+})
+
+
+
+  
+# observeEvent(input$Comparaisonseuropeennes,{
+# 
+#     output$CI_taux_100hbts<-renderHighchart({
+#       
+#       DataFinale <- ReactiveCI()[order(ReactiveCI()$value),] 
+#       
+#       highchart() %>%
+#         
+#         hc_exporting(enabled = TRUE,sourceWidth=1300,sourceHeight=700,formAttributes = list(target = "_blank"),
+#                      buttons=list(
+#                        contextButton=list(
+#                          y=23,
+#                          x=0,
+#                          text= "Télécharger",
+#                          menuItems=DowloadChart,
+#                          symbol=''))) %>%
+#         
+#         hc_add_series(data = DataFinale,hcaes(x=sous_indicateurs,y=as.numeric(value),color = color_choice), 
+#                       
+#                       type = 'column',
+#                       
+#                       name=unique(DataFinale$titre),showInLegend = FALSE,
+#                       
+#                       dataLabels = list(enabled = TRUE,format = "{point.y:,.1f}"))  %>%
+#         
+#         hc_xAxis(type="category",labels=list(enabled=TRUE),title=list(text=""),tickmarkPlacement='on',tickInterval=1) %>%
+#         
+#         #hc_xAxis(labels=list(enabled=TRUE),title=list(text="Pays"),tickmarkPlacement='on',tickInterval=1) %>%
+#         
+#         hc_title(text=ifelse(length(unique(DataFinale$unite_temps))>1,paste0(unique(DataFinale$titre)),paste0(unique(DataFinale$titre)," ","(",unique(DataFinale$unite_temps),")") ),
+#                  margin = 20, align = "left",
+#                  style = list(color = "#000000",fontWeight = "normal",fontSize='13px',useHTML = TRUE)) %>%
+#         
+#         hc_plotOptions(series = list(
+#           dataLabels = list(enabled=FALSE,style=list(color="#000000")),marker=list(enabled=FALSE),
+#           animation=FALSE,
+#           allowOverlap=TRUE,
+#           enableMouseTracking = TRUE))%>%
+#         
+#         hc_caption(
+#           text = str_c("Champ : ",unique(DataFinale$champ),
+#                        "<br/> Source :",unique(DataFinale$source),
+#                        "<br/> Unité de compte :",unique(DataFinale$unite_de_compte),
+#                        "<br/> Lecture :",ifelse(is.na(unique(DataFinale$Lecture)),"Note de lecture",unique(DataFinale$Lecture)),
+#                        sep = " "),
+#           style = list(fontWeight = "normal",fontSize = "11px"),
+#           align = "left",verticalAlign = 'bottom'
+#           
+#         ) 
+#       
+#     })
+#     
+#   },ignoreNULL=FALSE)
   
   
 

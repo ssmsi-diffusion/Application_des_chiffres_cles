@@ -111,108 +111,202 @@ Volssurpersonne_server<-function(input,output,session){
     
   })
  
-  
-  
-  
-observeEvent(input$Volssurpersonne,{
-  
-## Partie I : Vols avec violences      
-    
-output$victime_vol_personne<-renderHighchart({
  
-  highchartFunction(VolsPersonnes()$victime_vol_personne,'line',c("#0444a5","#77B5FE"),
-                     
-                     hcaes(x=as.character(unite_temps),y=as.numeric(value),group=Indicateurs),"IntegerValues",
-                     
-                     HEADER=unique(VolsPersonnes()$victime_vol_personne$titre),
-                     
-                     FormatLabelsData="Indicateurs",InfosPlus="Année")
+  ## Partie I : Vols avec violences      
+  
+  output$victime_vol_personne<-renderHighchart({
+    
+    highchartFunction(VolsPersonnes()$victime_vol_personne,'line',c("#0444a5","#77B5FE"),
+                      
+                      hcaes(x=as.character(unite_temps),y=as.numeric(value),group=Indicateurs),"IntegerValues",
+                      
+                      HEADER=unique(VolsPersonnes()$victime_vol_personne$titre),
+                      
+                      FormatLabelsData="Indicateurs",InfosPlus="Année")
+    
+    
+    
+    
+  })
   
   
   
-      
-    })
+  output$personne_plus_14<-renderHighchart({
+    Multiaxe(
+      VolsPersonnes()$vol_personne_plus_14,
+      VolsPersonnes()$Nb_victime_transport,
+      VolsPersonnes()$part_faits_transport,
+      VolsPersonnes()$vol_personne_plus_14$unite_temps,
+      c("column","line"),
+      c("#3497db","#FF7F00"))
+    
+  })
+  
+  
+  
+  output$rep_vol_personne<-renderHighchart({
+    
+    highchartFunction(VolsPersonnes()$rep_vol_personne,'pie',list("#0444a5","#77B5FE"),
+                      
+                      hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"PPIE",
+                      
+                      HEADER=unique(VolsPersonnes()$rep_vol_personne$titre),
+                      
+                      FormatLabelsData="Indicateurs")
     
     
     
-output$personne_plus_14<-renderHighchart({
-      Multiaxe(
-        VolsPersonnes()$vol_personne_plus_14,
-        VolsPersonnes()$Nb_victime_transport,
-        VolsPersonnes()$part_faits_transport,
-        VolsPersonnes()$vol_personne_plus_14$unite_temps,
-        c("column","line"),
-        c("#3497db","#FF7F00"))
-
-})
     
+  })
+  
+  
+  
+  ## Partie II : Vols sans violences
+  
+  
+  output$Nb_victimes_enregistre<-renderHighchart({
+    
+    highchartFunction(VolsPersonnes()$Nb_victimes_enreg,'line',c("#0444a5"),
+                      
+                      hcaes(x=as.character(unite_temps),y=as.numeric(value)),"IntegerValues",
+                      
+                      HEADER=unique(VolsPersonnes()$Nb_victimes_enreg$titre), 
+                      
+                      FormatLabelsData="unite_temps")
+    
+    
+  })
+  
+  
+  
+  
+  output$Nb_victimes_enquete_ind<-renderHighchart({
+    Multiaxe(
+      VolsPersonnes()$Nb_victimes_enquete,
+      VolsPersonnes()$Nombre,
+      VolsPersonnes()$proportion,
+      VolsPersonnes()$Nb_victimes_enquete$unite_temps,
+      c("column","line"),
+      c("#3497db","#FF7F00"))
+  })
+  
+  
+  
+  output$repart_vol_sans_violence<-renderHighchart({
+    
+    highchartFunction(VolsPersonnes()$rep_vol_sans_violence,'pie',list("#3497db","#FF7F00"),
+                      
+                      hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"PPIE",
+                      
+                      HEADER=unique(VolsPersonnes()$rep_vol_sans_violence$titre), 
+                      
+                      FormatLabelsData="Indicateurs")
+    
+    
+    
+  })  
    
-    
-output$rep_vol_personne<-renderHighchart({
- 
-  highchartFunction(VolsPersonnes()$rep_vol_personne,'pie',list("#0444a5","#77B5FE"),
-                     
-                     hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"PPIE",
-                     
-                     HEADER=unique(VolsPersonnes()$rep_vol_personne$titre),
-                     
-                     FormatLabelsData="Indicateurs")
   
   
-  
-      
- })
-    
-   
-
-## Partie II : Vols sans violences
-
-
-output$Nb_victimes_enregistre<-renderHighchart({
-      
-  highchartFunction(VolsPersonnes()$Nb_victimes_enreg,'line',c("#0444a5"),
-                     
-                     hcaes(x=as.character(unite_temps),y=as.numeric(value)),"IntegerValues",
-                     
-                     HEADER=unique(VolsPersonnes()$Nb_victimes_enreg$titre), 
-                     
-                     FormatLabelsData="unite_temps")
-  
-      
-    })
-
-
-
-
-output$Nb_victimes_enquete_ind<-renderHighchart({
-  Multiaxe(
-    VolsPersonnes()$Nb_victimes_enquete,
-    VolsPersonnes()$Nombre,
-    VolsPersonnes()$proportion,
-    VolsPersonnes()$Nb_victimes_enquete$unite_temps,
-    c("column","line"),
-    c("#3497db","#FF7F00"))
-})
-    
-    
-    
-output$repart_vol_sans_violence<-renderHighchart({
-
-  highchartFunction(VolsPersonnes()$rep_vol_sans_violence,'pie',list("#3497db","#FF7F00"),
-                     
-                     hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"PPIE",
-                     
-                     HEADER=unique(VolsPersonnes()$rep_vol_sans_violence$titre), 
-                     
-                     FormatLabelsData="Indicateurs")
-  
-  
-      
-    })
-    
-
-
-},ignoreInit=FALSE,ignoreNULL=FALSE)
+# observeEvent(input$Volssurpersonne,{
+#   
+# ## Partie I : Vols avec violences      
+#     
+# output$victime_vol_personne<-renderHighchart({
+#  
+#   highchartFunction(VolsPersonnes()$victime_vol_personne,'line',c("#0444a5","#77B5FE"),
+#                      
+#                      hcaes(x=as.character(unite_temps),y=as.numeric(value),group=Indicateurs),"IntegerValues",
+#                      
+#                      HEADER=unique(VolsPersonnes()$victime_vol_personne$titre),
+#                      
+#                      FormatLabelsData="Indicateurs",InfosPlus="Année")
+#   
+#   
+#   
+#       
+#     })
+#     
+#     
+#     
+# output$personne_plus_14<-renderHighchart({
+#       Multiaxe(
+#         VolsPersonnes()$vol_personne_plus_14,
+#         VolsPersonnes()$Nb_victime_transport,
+#         VolsPersonnes()$part_faits_transport,
+#         VolsPersonnes()$vol_personne_plus_14$unite_temps,
+#         c("column","line"),
+#         c("#3497db","#FF7F00"))
+# 
+# })
+#     
+#    
+#     
+# output$rep_vol_personne<-renderHighchart({
+#  
+#   highchartFunction(VolsPersonnes()$rep_vol_personne,'pie',list("#0444a5","#77B5FE"),
+#                      
+#                      hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"PPIE",
+#                      
+#                      HEADER=unique(VolsPersonnes()$rep_vol_personne$titre),
+#                      
+#                      FormatLabelsData="Indicateurs")
+#   
+#   
+#   
+#       
+#  })
+#     
+#    
+# 
+# ## Partie II : Vols sans violences
+# 
+# 
+# output$Nb_victimes_enregistre<-renderHighchart({
+#       
+#   highchartFunction(VolsPersonnes()$Nb_victimes_enreg,'line',c("#0444a5"),
+#                      
+#                      hcaes(x=as.character(unite_temps),y=as.numeric(value)),"IntegerValues",
+#                      
+#                      HEADER=unique(VolsPersonnes()$Nb_victimes_enreg$titre), 
+#                      
+#                      FormatLabelsData="unite_temps")
+#   
+#       
+#     })
+# 
+# 
+# 
+# 
+# output$Nb_victimes_enquete_ind<-renderHighchart({
+#   Multiaxe(
+#     VolsPersonnes()$Nb_victimes_enquete,
+#     VolsPersonnes()$Nombre,
+#     VolsPersonnes()$proportion,
+#     VolsPersonnes()$Nb_victimes_enquete$unite_temps,
+#     c("column","line"),
+#     c("#3497db","#FF7F00"))
+# })
+#     
+#     
+#     
+# output$repart_vol_sans_violence<-renderHighchart({
+# 
+#   highchartFunction(VolsPersonnes()$rep_vol_sans_violence,'pie',list("#3497db","#FF7F00"),
+#                      
+#                      hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"PPIE",
+#                      
+#                      HEADER=unique(VolsPersonnes()$rep_vol_sans_violence$titre), 
+#                      
+#                      FormatLabelsData="Indicateurs")
+#   
+#   
+#       
+# })
+#     
+# 
+# 
+# },ignoreInit=FALSE,ignoreNULL=FALSE)
   
 
   

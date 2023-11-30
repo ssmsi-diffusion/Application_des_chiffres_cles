@@ -79,140 +79,276 @@ Reactive_Crimes_Delits_Contraventions_LGBT<-reactive({
     
 }) 
   
-  
-observeEvent(input$Discriminationsetcrimesdehaine,{
-    
-    output$discriminationsUi<-renderUI({
-      
-      if(input$discriminationsID=="LGBT"){
-        
-        tagList(
-          
-          outside_container(
-            
-            
-            BoxForChart(Button('LGBT_a'),highchartOutput("Nb_atteintes_LGBT")),
-                  
-            BoxForChart(Button('LGBT_b'),highchartOutput('crimes_delits_contraventions_LGBT'),
-                         
-                         Selector=TRUE,selectInput("LGBT_crimes_delits_contraventions","",sort(unique(DiscriminationsData()$crimes_delits_contraventions_LGBT$statistiques)) ))),
-          
-          br()
-          
-        )
-        
-      } else if (input$discriminationsID=="outrages") {
-        
-        tagList(
-          
-          outside_container(BoxForChart(Button('outrages_a'),highchartOutput('Nb_infractions'),Selector=FALSE,FullPage=TRUE)),
-          
-          br()
-          
-        )
-        
-        
-      } else if (input$discriminationsID=="racistes"){
-        
-        tagList(
 
-          outside_container(
-            
-            BoxForChart(Button('caractere_raciste_a'),highchartOutput('Nb_atteintes_racistes')),
-            
-            BoxForChart(Button('caractere_raciste_b'),highchartOutput('repart_ar_type'))),
-          
-          br()
-          
-        )
+
+
+output$discriminationsUi<-renderUI({
+  
+  if(input$discriminationsID=="LGBT"){
+    
+    tagList(
+      
+      outside_container(
         
         
-      }
+        BoxForChart(Button('LGBT_a'),highchartOutput("Nb_atteintes_LGBT")),
+        
+        BoxForChart(Button('LGBT_b'),highchartOutput('crimes_delits_contraventions_LGBT'),
+                    
+                    Selector=TRUE,selectInput("LGBT_crimes_delits_contraventions","",sort(unique(DiscriminationsData()$crimes_delits_contraventions_LGBT$statistiques)) ))),
       
+      br()
       
-    })
+    )
+    
+  } else if (input$discriminationsID=="outrages") {
+    
+    tagList(
+      
+      outside_container(BoxForChart(Button('outrages_a'),highchartOutput('Nb_infractions'),Selector=FALSE,FullPage=TRUE)),
+      
+      br()
+      
+    )
     
     
+  } else if (input$discriminationsID=="racistes"){
+    
+    tagList(
+      
+      outside_container(
+        
+        BoxForChart(Button('caractere_raciste_a'),highchartOutput('Nb_atteintes_racistes')),
+        
+        BoxForChart(Button('caractere_raciste_b'),highchartOutput('repart_ar_type'))),
+      
+      br()
+      
+    )
     
     
+  }
+  
+  
+})
+
+
+
+
 ### LGBT  
-    
+
 output$Nb_atteintes_LGBT<-renderHighchart({
-
+  
   highchartFunction(DiscriminationsData()$Nb_atteintes_LGBT,'column',c("#FF7F00","#1283f3"),
-                     
-                     hcaes(x=as.character(unite_temps),y=as.numeric(value),group=sous_indicateurs),"stacking",
-                     
-                     HEADER=unique(DiscriminationsData()$Nb_atteintes_LGBT$titre),
-                     
-                     FormatLabelsData="sous_indicateurs",InfosPlus="Année")
+                    
+                    hcaes(x=as.character(unite_temps),y=as.numeric(value),group=sous_indicateurs),"stacking",
+                    
+                    HEADER=unique(DiscriminationsData()$Nb_atteintes_LGBT$titre),
+                    
+                    FormatLabelsData="sous_indicateurs",InfosPlus="Année")
   
   
-      
+  
 })
-    
-    
+
+
 output$crimes_delits_contraventions_LGBT<-renderHighchart({
-
+  
   highchartFunction(Reactive_Crimes_Delits_Contraventions_LGBT(),'pie',ChoixCouleurs,
-                     
-                     hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"PPIE",
-                     
-                     HEADER=unique(Reactive_Crimes_Delits_Contraventions_LGBT()$titre),  
-                     
-                     FormatLabelsData="sous_indicateurs")
-
+                    
+                    hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"PPIE",
+                    
+                    HEADER=unique(Reactive_Crimes_Delits_Contraventions_LGBT()$titre),  
+                    
+                    FormatLabelsData="sous_indicateurs")
+  
 })
-    
-    
+
+
 ###  Outrages sexistes  
-    
+
 output$Nb_infractions<-renderHighchart({
-      
+  
   highchartFunction(DiscriminationsData()$Nb_outrages_sexistes,'line',c("#FF7F00"),
-                     
-                     hcaes(x=as.character(unite_temps),y=as.numeric(value)),"IntegerValues",
-                     
-                     HEADER=unique(DiscriminationsData()$Nb_outrages_sexistes$titre), 
-                     
-                     FormatLabelsData="unite_temps")
+                    
+                    hcaes(x=as.character(unite_temps),y=as.numeric(value)),"IntegerValues",
+                    
+                    HEADER=unique(DiscriminationsData()$Nb_outrages_sexistes$titre), 
+                    
+                    FormatLabelsData="unite_temps")
   
-
+  
 })
-    
-    
-#### Atteintes à caractères racistes  
-    
-output$Nb_atteintes_racistes<-renderHighchart({
 
+
+#### Atteintes à caractères racistes  
+
+output$Nb_atteintes_racistes<-renderHighchart({
+  
   highchartFunction(DiscriminationsData()$Nb_atteintes_racistes,'column',c("#FF7F00","#1283f3"),
-                     
-                     hcaes(x=as.character(unite_temps),y=as.numeric(value),group=sous_indicateurs),"stacking",
-                     
-                     HEADER=unique(DiscriminationsData()$Nb_atteintes_racistes$titre), 
-                     
-                     FormatLabelsData="sous_indicateurs",InfosPlus="Année")
+                    
+                    hcaes(x=as.character(unite_temps),y=as.numeric(value),group=sous_indicateurs),"stacking",
+                    
+                    HEADER=unique(DiscriminationsData()$Nb_atteintes_racistes$titre), 
+                    
+                    FormatLabelsData="sous_indicateurs",InfosPlus="Année")
   
-      
-  })
-    
-    
-    
+  
+})
+
+
+
 output$repart_ar_type<-renderHighchart({
-      
-  highchartFunction(DiscriminationsData()$repart_atteintes,'pie',ChoixCouleurs,
-                     
-                     hcaes(x=as.character(unite_temps),y=as.numeric(value)),"PPIE",
-                     
-                     HEADER=unique(DiscriminationsData()$repart_atteintes$titre),
-                     
-                     FormatLabelsData="Indicateurs")
   
-      
-    })
-    
-    
-},ignoreNULL=FALSE)
+  highchartFunction(DiscriminationsData()$repart_atteintes,'pie',ChoixCouleurs,
+                    
+                    hcaes(x=as.character(unite_temps),y=as.numeric(value)),"PPIE",
+                    
+                    HEADER=unique(DiscriminationsData()$repart_atteintes$titre),
+                    
+                    FormatLabelsData="Indicateurs")
+  
+  
+})
+
+
+
+
+
+  
+# observeEvent(input$Discriminationsetcrimesdehaine,{
+#     
+#     output$discriminationsUi<-renderUI({
+#       
+#       if(input$discriminationsID=="LGBT"){
+#         
+#         tagList(
+#           
+#           outside_container(
+#             
+#             
+#             BoxForChart(Button('LGBT_a'),highchartOutput("Nb_atteintes_LGBT")),
+#                   
+#             BoxForChart(Button('LGBT_b'),highchartOutput('crimes_delits_contraventions_LGBT'),
+#                          
+#                          Selector=TRUE,selectInput("LGBT_crimes_delits_contraventions","",sort(unique(DiscriminationsData()$crimes_delits_contraventions_LGBT$statistiques)) ))),
+#           
+#           br()
+#           
+#         )
+#         
+#       } else if (input$discriminationsID=="outrages") {
+#         
+#         tagList(
+#           
+#           outside_container(BoxForChart(Button('outrages_a'),highchartOutput('Nb_infractions'),Selector=FALSE,FullPage=TRUE)),
+#           
+#           br()
+#           
+#         )
+#         
+#         
+#       } else if (input$discriminationsID=="racistes"){
+#         
+#         tagList(
+# 
+#           outside_container(
+#             
+#             BoxForChart(Button('caractere_raciste_a'),highchartOutput('Nb_atteintes_racistes')),
+#             
+#             BoxForChart(Button('caractere_raciste_b'),highchartOutput('repart_ar_type'))),
+#           
+#           br()
+#           
+#         )
+#         
+#         
+#       }
+#       
+#       
+#     })
+#     
+#     
+#     
+#     
+# ### LGBT  
+#     
+# output$Nb_atteintes_LGBT<-renderHighchart({
+# 
+#   highchartFunction(DiscriminationsData()$Nb_atteintes_LGBT,'column',c("#FF7F00","#1283f3"),
+#                      
+#                      hcaes(x=as.character(unite_temps),y=as.numeric(value),group=sous_indicateurs),"stacking",
+#                      
+#                      HEADER=unique(DiscriminationsData()$Nb_atteintes_LGBT$titre),
+#                      
+#                      FormatLabelsData="sous_indicateurs",InfosPlus="Année")
+#   
+#   
+#       
+# })
+#     
+#     
+# output$crimes_delits_contraventions_LGBT<-renderHighchart({
+# 
+#   highchartFunction(Reactive_Crimes_Delits_Contraventions_LGBT(),'pie',ChoixCouleurs,
+#                      
+#                      hcaes(x=as.character(Indicateurs),y=as.numeric(value)),"PPIE",
+#                      
+#                      HEADER=unique(Reactive_Crimes_Delits_Contraventions_LGBT()$titre),  
+#                      
+#                      FormatLabelsData="sous_indicateurs")
+# 
+# })
+#     
+#     
+# ###  Outrages sexistes  
+#     
+# output$Nb_infractions<-renderHighchart({
+#       
+#   highchartFunction(DiscriminationsData()$Nb_outrages_sexistes,'line',c("#FF7F00"),
+#                      
+#                      hcaes(x=as.character(unite_temps),y=as.numeric(value)),"IntegerValues",
+#                      
+#                      HEADER=unique(DiscriminationsData()$Nb_outrages_sexistes$titre), 
+#                      
+#                      FormatLabelsData="unite_temps")
+#   
+# 
+# })
+#     
+#     
+# #### Atteintes à caractères racistes  
+#     
+# output$Nb_atteintes_racistes<-renderHighchart({
+# 
+#   highchartFunction(DiscriminationsData()$Nb_atteintes_racistes,'column',c("#FF7F00","#1283f3"),
+#                      
+#                      hcaes(x=as.character(unite_temps),y=as.numeric(value),group=sous_indicateurs),"stacking",
+#                      
+#                      HEADER=unique(DiscriminationsData()$Nb_atteintes_racistes$titre), 
+#                      
+#                      FormatLabelsData="sous_indicateurs",InfosPlus="Année")
+#   
+#       
+#   })
+#     
+#     
+#     
+# output$repart_ar_type<-renderHighchart({
+#       
+#   highchartFunction(DiscriminationsData()$repart_atteintes,'pie',ChoixCouleurs,
+#                      
+#                      hcaes(x=as.character(unite_temps),y=as.numeric(value)),"PPIE",
+#                      
+#                      HEADER=unique(DiscriminationsData()$repart_atteintes$titre),
+#                      
+#                      FormatLabelsData="Indicateurs")
+#   
+#       
+#   })
+#     
+#     
+# },ignoreNULL=FALSE)
   
   
   
